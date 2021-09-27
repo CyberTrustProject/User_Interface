@@ -1,0 +1,206 @@
+[
+   {
+      "Event":{
+         "id":"137468",
+         "orgc_id":"1",
+         "org_id":"1",
+         "date":"2020-03-10",
+         "threat_level_id":"4",
+         "info":"CVE-2020-4084",
+         "published":False,
+         "uuid":"5e6749d2-97b8-469a-a78d-06aeac120002",
+         "attribute_count":"6",
+         "analysis":"2",
+         "timestamp":"1583827844",
+         "distribution":"0",
+         "proposal_email_lock":False,
+         "locked":False,
+         "publish_timestamp":"0",
+         "sharing_group_id":"0",
+         "disable_correlation":False,
+         "extends_uuid":"",
+         "Org":{
+            "id":"1",
+            "name":"ORGNAME",
+            "uuid":"5de3fa54-b28c-473f-9487-0027ac120003"
+         },
+         "Orgc":{
+            "id":"1",
+            "name":"ORGNAME",
+            "uuid":"5de3fa54-b28c-473f-9487-0027ac120003"
+         },
+         "Attribute":[
+
+         ],
+         "ShadowAttribute":[
+
+         ],
+         "RelatedEvent":[
+
+         ],
+         "Galaxy":[
+
+         ],
+         "Object":[
+            {
+               "id":"268585",
+               "name":"vulnerability",
+               "meta-category":"vulnerability",
+               "description":"Vulnerability object describing a common vulnerability enumeration which can describe published, unpublished, under review or embargo vulnerability for software, equipments or hardware.",
+               "template_uuid":"81650945-f186-437b-8945-9f31715d32da",
+               "template_version":"5",
+               "event_id":"137468",
+               "uuid":"eff34457-087b-4768-9f1c-ea1779fbd47e",
+               "timestamp":"1583827844",
+               "distribution":"5",
+               "sharing_group_id":"0",
+               "comment":"",
+               "deleted":False,
+               "ObjectReference":[
+
+               ],
+               "Attribute":[
+                  {
+                     "id":"4789621",
+                     "type":"text",
+                     "category":"Other",
+                     "to_ids":False,
+                     "uuid":"1adade8a-1fd5-4310-b4ca-1d314a5f15cb",
+                     "event_id":"137468",
+                     "distribution":"5",
+                     "timestamp":"1583827844",
+                     "comment":"",
+                     "sharing_group_id":"0",
+                     "deleted":False,
+                     "disable_correlation":True,
+                     "object_id":"268585",
+                     "object_relation":"id",
+                     "value":"CVE-2020-4084",
+                     "Galaxy":[
+
+                     ],
+                     "ShadowAttribute":[
+
+                     ]
+                  },
+                  {
+                     "id":"4789622",
+                     "type":"datetime",
+                     "category":"Other",
+                     "to_ids":False,
+                     "uuid":"679e248c-663d-4bc5-8cfc-eeff67b65180",
+                     "event_id":"137468",
+                     "distribution":"5",
+                     "timestamp":"1583827844",
+                     "comment":"",
+                     "sharing_group_id":"0",
+                     "deleted":False,
+                     "disable_correlation":True,
+                     "object_id":"268585",
+                     "object_relation":"published",
+                     "value":"2020-03-09T17:15:00+00:00",
+                     "Galaxy":[
+
+                     ],
+                     "ShadowAttribute":[
+
+                     ]
+                  },
+                  {
+                     "id":"4789623",
+                     "type":"datetime",
+                     "category":"Other",
+                     "to_ids":False,
+                     "uuid":"d74c38ac-98a7-4ad0-bab4-60d515cdbdf7",
+                     "event_id":"137468",
+                     "distribution":"5",
+                     "timestamp":"1583827844",
+                     "comment":"",
+                     "sharing_group_id":"0",
+                     "deleted":False,
+                     "disable_correlation":True,
+                     "object_id":"268585",
+                     "object_relation":"modified",
+                     "value":"2020-03-09T17:20:00+00:00",
+                     "Galaxy":[
+
+                     ],
+                     "ShadowAttribute":[
+
+                     ]
+                  },
+                  {
+                     "id":"4789624",
+                     "type":"link",
+                     "category":"External analysis",
+                     "to_ids":False,
+                     "uuid":"d40eb6e9-d217-4def-a3f7-639674039c2c",
+                     "event_id":"137468",
+                     "distribution":"5",
+                     "timestamp":"1583827844",
+                     "comment":"[]",
+                     "sharing_group_id":"0",
+                     "deleted":False,
+                     "disable_correlation":True,
+                     "object_id":"268585",
+                     "object_relation":"references",
+                     "value":"https://support.hcltechsw.com/csm?id=kb_article&sysparm_article=KB0076649",
+                     "Galaxy":[
+
+                     ],
+                     "ShadowAttribute":[
+
+                     ]
+                  },
+                  {
+                     "id":"4789625",
+                     "type":"text",
+                     "category":"Other",
+                     "to_ids":False,
+                     "uuid":"fdd62676-adf7-4933-9a8e-eb6ca9d4aecf",
+                     "event_id":"137468",
+                     "distribution":"5",
+                     "timestamp":"1583827844",
+                     "comment":"",
+                     "sharing_group_id":"0",
+                     "deleted":False,
+                     "disable_correlation":True,
+                     "object_id":"268585",
+                     "object_relation":"description",
+                     "value":"HCL Connections v5.5, v6.0, and v6.5 are vulnerable to cross-site scripting. This vulnerability allows users to embed arbitrary JavaScript code in the Web UI thus altering the intended functionality potentially leading to credentials disclosure within a trusted session.",
+                     "Galaxy":[
+
+                     ],
+                     "ShadowAttribute":[
+
+                     ]
+                  },
+                  {
+                     "id":"4789626",
+                     "type":"text",
+                     "category":"Other",
+                     "to_ids":False,
+                     "uuid":"c531989c-2601-44bb-af03-6e2084129cfb",
+                     "event_id":"137468",
+                     "distribution":"5",
+                     "timestamp":"1583827844",
+                     "comment":"",
+                     "sharing_group_id":"0",
+                     "deleted":False,
+                     "disable_correlation":True,
+                     "object_id":"268585",
+                     "object_relation":"credit",
+                     "value":"nvd",
+                     "Galaxy":[
+
+                     ],
+                     "ShadowAttribute":[
+
+                     ]
+                  }
+               ]
+            }
+         ]
+      }
+   }
+]

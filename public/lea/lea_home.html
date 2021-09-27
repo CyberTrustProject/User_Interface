@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="Cyber Trust">
+    <meta name="author" content="Mathema srl">
+    <meta name="keyword" content="Cyber Trust by Mathema">
+    <title>Cyber Trust</title>
+    <!-- CSS -->
+    <!-- Bootstrap -->
+    <link href="../js2/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <!-- Various -->
+    <link href="../css2/cybertrust.css" rel="stylesheet" id="cybertrust-css">
+
+    <!-- Dashboard -->
+    <link href="../css2/dashboard_lea.css" rel="stylesheet" id="dashboard-css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <!-- Datepicker -->
+    <link href="../css2/jquery.datetimepicker.min.css" rel="stylesheet">
+    <!-- DataTable -->
+    <link rel="stylesheet" type="text/css" href="../js2/DataTables/datatables.min.css"/>
+    <!-- GoldenLayout -->
+    <link type="text/css" rel="stylesheet" href="../js2/goldenLayout/goldenlayout-base.css" />
+    <link type="text/css" rel="stylesheet" href="../js2/goldenLayout/goldenlayout-light-theme.css" />
+    <!-- ChartJS -->
+    <link type="text/css" rel="stylesheet" href="../js2/ChartJS/Chart.min.css"/>
+    <!-- Context Menu -->
+    <link rel="stylesheet" href="../js2/contextMenu/jquery.contextMenu.min.css">
+
+</head>
+<body class="fixed-sn light-purple-skin">
+<!-- MAIN DASHBOARD -->
+    <div class="container-fluid">
+        <div class="row" style="height: 100%;">
+        <div class="col-md-2 col-sm-1" id="navigation">
+            <div class="logo">
+                <a hef="home.html"><img src="../images/logo_cybertrust.png" alt="cybertrust_logo" class="hidden-xs hidden-sm"></a>
+            </div>
+            <div class="navi">
+                <ul>
+                    <li target='dashCases' class="active">  <a href="javascript:void(0)">    <i class="fa fa-align-justify" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Cases</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10 col-sm-11 contentbox">
+            <div class="leaPalette container-width-fluid" >
+                <a class="navbar-brand leaPalette noManina" href="javascript:void(0);">LEA</a>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light leaPalette ml-auto" >
+                    <li class="nav-item d-md-down-none" style="text-align: right;" >
+                        <div class='logout' id="logoutUser"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</div>
+                    </li>
+                </nav>
+            </div>
+            <div class="user-dashboard" landing="dashCases">
+                    <h1>CASES</h1>
+                    <div>
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item" >
+                                <a class="nav-link active" href="javascript:void(0);" ca_target='tabCases'>List</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div >
+                        <div class="user-dashboard" ca_landing="tabCases">
+                            <h1>Cases</h1>
+                            <div>
+                                <ol class="breadcrumb breadcrumb-arrow" id="breadcrumbCases">
+                                    <li><a href="javascript:void(0)" displayer displayLabel="cases" displayMode="list">Cases list</a></li>
+                                </ol>
+                            </div>
+                            <div label="cases" mode="list">
+                                <div id="headerUtenti" style=" margin-top: 10px; text-align: right">
+                                    <button type="button" class="btn btn-primary" id="addUser" displayer displayLabel="cases" displayMode="form" adder="case">Add new case</button>
+                                    <button jmRefresh="cases" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                                </div>
+                                <div class="row">
+                                    <table id="casesTable" class="tabella display cell-border compact stripe" style="width:100%">
+                                        <thead class="tabHeader">
+                                        <tr>
+                                            <th>Case number</th>
+                                            <th>Case nature</th>
+                                            <th>Status</th>
+                                            <th>LPS date</th>
+                                            <th>Requested due date</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody jmTable="boxRows">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div label="cases" style="display: none;" mode="form">
+                                <form id="addCaseForm">
+                                    <div class="form-group">
+                                        <h4>Case information</h4>
+                                        <div id="caseFormInfo">
+                                            <div class="row">
+                                                <div class="input-group mb-3 col">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Internal case reference number</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="case_icrn" name="case_icrn" aria-describedby="basic-addon3" data-validation="length" data-validation-length="3-12" data-validation-error-msg="The id has to be an alphanumeric value (0-12 chars)" formShow="toDisable">
+                                                </div>
+                                                <div></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-group mb-3 col">
+                                                    <div class="input-group-prepend">
+                                                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                                id="case_legalProcess_button" formShow="toDisable">Legal process</button>
+                                                        <div class="dropdown-menu" id="caseLegalProcessMenu">
+                                                            <a class="dropdown-item" href="javascript:void(0)" legalProcessOption="Civil procedure">Civil procedure</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)" legalProcessOption="Due process">Due process</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)" legalProcessOption="Legal proceedings">Legal proceedings</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)" legalProcessOption="Legal process outsourcing">Legal process outsourcing</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)" legalProcessOption="Procedural trial">Procedural trial</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)" legalProcessOption="Trial">Trial</a>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" aria-label="" id="case_legalProcess" name="case_legalProcess" toDisabled >
+                                                </div>
+                                                <div class="input-group mb-3 col">
+                                                    <div class="input-group-prepend">
+                                                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="case_nature_button" formShow="toDisable">Nature of the case</button>
+                                                        <div class="dropdown-menu" id="caseNatureMenu">
+                                                            <a class="dropdown-item" href="javascript:void(0)" natureOption="Civil Case"    >Civil Case</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)" natureOption="Criminal case" >Criminal case</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)" natureOption="Other"         >Other</a>
+                                                        </div>
+                                                    </div>
+                                                    <input type="text" class="form-control" aria-label="" id="case_nature" name="case_legalProcess" toDisabled>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-group mb-3 col">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" >Legal processed signed date</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="case_lpsd" name="case_lpsd" aria-describedby="basic-addon3" data-validation="date" data-validation-format="dd/mm/yyyy" data-validation-error-msg="Please insert a valid date for the signing" formShow="toDisable">
+                                                </div>
+                                                <div class="input-group mb-3 col">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" >Request due date</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="case_rdd" name="case_rdd" aria-describedby="basic-addon3" data-validation="date" data-validation-format="dd/mm/yyyy" data-validation-error-msg="Please insert a valid date for the requested due date" formShow="toDisable">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h4>Reference</h4>
+                                        <div id="caseFormReference">
+                                            <div class="row" formShow="toHide" formAdd="toShow">
+                                                <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Reference</span>
+                                                </div>
+                                                <input type="text" class="form-control" aria-label="" id="case_reference_input"/>
+                                                <div class="input-group-append">
+                                                    <button type="button" class="btn btn-outline-secondary" id="case_reference_inputButton">Insert</button>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-group mb-3 col">
+                                                    <ul class="list-group" id="referenceList">
+                                                        <li class="list-group-item" name="references" jmli="reference"></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h4>Accounts</h4>
+                                        <div id="caseFormAccounts">
+                                            <div class="row" formShow="toHide" formAdd="toShow" >
+                                                <div class="input-group mb-3 col">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Accounts</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" aria-label="" id="case_accounts_input"/>
+                                                    <div class="input-group-append">
+                                                        <button type="button" class="btn btn-outline-secondary" id="case_accounts_inputButton">Insert</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-group mb-3 col">
+                                                    <ul class="list-group" id="accountList">
+                                                        <li class="list-group-item" name="accounts" jmli="account"></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <input type="button" value="Submit"     id="caseFormSubmit" class="btn btn-success" formShow="toHide"  formAdd="toShow"/>
+                                        <input type="button" value="Edit"       id="caseFormEdit"   class="btn btn-warning" formShow="toShow"  formAdd="toHide"/>
+                                        <input type="button" value="Back"       id="caseFormCancel" class="btn btn-default" displayer displayLabel="cases" displayMode="list"/>
+                                    </div>
+                                    <div hidden>
+                                        <input id="hidden_legalProcess" name="legalProcess"/>
+                                        <input id="hidden_nature"       name="nature"/>
+                                        <input id="hidden_references"   name="references"/>
+                                        <input id="hidden_accounts"     name="accounts"/>
+                                        <input id="case_id"                name="case_id" value=""/>
+                                        <input id="todo"                name="todo" value="add"/>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+        <!-- /MAIN DASHBOARD -->
+        <!-- MODAL -->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Log out</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure to leave the <b>Cyber Trust</b> platform?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                    <button type="button" class="btn btn-primary" id="execLogout">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!--/MODAL/-->
+    </div>
+</body>
+<!-- Jquery -->
+<script type="text/javascript" src="../js2/jquery-3.4.1.min.js"></script>
+<!-- AjaxForm -->
+<script type="text/javascript" src="../js2/jquery.form.min.js"></script>
+<!-- Popper -->
+<script type="text/javascript" src="../js2/popper/popper.min.js"></script>
+<!-- Bootstrap -->
+<script type="text/javascript" src="../js2/bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTable Full -->
+<script type="text/javascript" src="../js2/DataTables/datatables.min.js"></script>
+<!-- Datepicker -->
+<script src="../js2/jquery.datetimepicker.full.min.js"></script>
+<!-- Validator -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+<!-- GoldenLayout -->
+<script type="text/javascript" src="../js2/goldenLayout/goldenlayout.min.js"></script>
+<!-- ChartJS -->
+<script type="text/javascript" src="../js2/ChartJS/Chart.bundle.min.js"></script>
+<!-- Moment -->
+<script type="text/javascript" src="../js2/moment.min.js"></script>
+<!-- Context Menu -->
+<script src="../js2/contextMenu/jquery.contextMenu.min.js"></script>
+<script src="../js2/contextMenu/jquery.ui.position.js"></script>
+<!-- Pagina -->
+<script type="text/javascript" src="../js2/Common.js"></script>
+<script type="text/javascript" src="./lea_home.js"></script>
+<script src="../host.js"></script>
+</html>

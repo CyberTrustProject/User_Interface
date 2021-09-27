@@ -1,0 +1,37 @@
+body{
+	color: #595959;
+	font-size:0.9rem;
+	}
+
+h1, h2, h3, h4{
+	color: #895e1f;
+	font-size:1.2rem;
+	}
+
+.container{
+	max-width: 900px;
+	}
+	
+.lander{
+	text-align: center;
+	}
+	
+
+.logo{
+	width: 200px;
+	height: auto;
+	margin-top: 2em;
+	margin-bottom: 4em;
+	}
+
+.btn-cyber {
+    color: #fff;
+    background-color: #2a3235;
+    border-color: #2a3235;
+}
+
+.btn-cyber:hover,
+.btn-cyber:focus,
+.btn-cyber:active {
+    opacity: .8;
+}

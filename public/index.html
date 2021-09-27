@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+	<head>
+	<title>CYBER TRUST INTRO</title>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap -->
+    <link href="./js2/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <!-- Datepicker -->
+    <link href="../css2/jquery.datetimepicker.min.css" rel="stylesheet">
+
+        <!-- Frisbi CSS -->
+	<link rel="stylesheet" href="css/owner.css">
+    <!-- loader -->
+    <link rel="stylesheet" href="css2/cybertrust.css">
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- Jquery -->
+    <script type="text/javascript" src="./js2/jquery-3.4.1.min.js"></script>
+    <!-- AjaxForm -->
+    <script type="text/javascript" src="./js2/jquery.form.min.js"></script>
+    <!-- Popper -->
+    <script type="text/javascript" src="./js2/popper/popper.min.js"></script>
+    <!-- Bootstrap -->
+    <script type="text/javascript" src="./js2/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Datepicker -->
+    <script type="text/javascript" src="./js2/jquery.datetimepicker.full.min.js"></script>
+    <!--Data repository -->
+    <script src="./host.js"></script>
+    <script src="./js2/Common.js"></script>
+    <script src="./index.js"></script>
+    <script type="text/javascript" src="./js2/profilingServices.js"></script>
+	</head>
+    <body class="login text-center">
+    <form class="form-signin" id="form-signin">
+        <a href="../index.html"><img class="logo mb-4" src="images/logo_cybertrust.png"></a>
+        <h1 class="h5 mb-3 font-weight-normal">Please sign in</h1>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" value="" required autofocus  inputForm>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" value="" required inputForm>
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button class="btn btn-cyber btn-block" type="button" id="login" >Log in</button>
+        <p class="mt-5 mb-3 text-muted">&copy; CyberTrust 2018</p>
+        <button class="btn btn-warning btn-block" type="button" id="addNewUser" >Register</button>
+        <br>
+        <button class="btn btn-warning btn-block" type="button" id="downloadApp" data-toggle="modal" data-target="#downloadAppModal" >Download Android App</button>
+
+    </form>
+    </body>
+    <div class="modal fade" id="newUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addUserForm" new=true>
+                        <div class="form-group">
+                            <div id="userFormPersonalData">
+                                <h4>Personal Data</h4>
+                                <div class="row">
+                                    <div class="input-group mb-3 col">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Name</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="user_firstname" name="user_firstname"  placeholder="Firstname" toValidate="required">
+                                    </div>
+                                    <div class="input-group mb-3 col">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" >Surname</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="user_lastname" name="user_lastname" placeholder="Lastname" toValidate="required">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-group mb-3 col">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" >Date of birth</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="user_dateofbirth" name="user_dateofbirth" placeholder="DD-MM-YYYY" readonly toValidate="required">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="userFormContacts">
+                                <h4>Contacts</h4>
+                                <div class="row">
+                                    <div class="input-group mb-3 col">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Email</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="user_email" name="user_email" placeholder="example@mail.com" toValidate="required email"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-group mb-3 col">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" >Telephone</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="user_telephone" name="user_telephone" placeholder="+## XXX YYY YYY YYYYY"  toValidate="required">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="userFormCredentials">
+                                <h4>Credentials</h4>
+                                <div class="row" formRead='false'>
+                                    <div class="input-group mb-3 col">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Username</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="user_username" name="user_username" aria-describedby="basic-addon3" placeholder="Username" toValidate="required" unique='username'>
+                                    </div>
+                                    <div class="input-group mb-3 col">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" >Password</span>
+                                        </div>
+                                        <input type="password" class="form-control" id="user_password" name="user_password" placeholder="Password"  toValidate="required password">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <input id="policy" type="checkbox" value="1"> I accept the <b>Data Protection Policy</b>
+                                </br>
+                                <a href="policy.html" target="_blank">Read the policy here</a>
+                            </div>
+                        </div>
+                        <div hidden >
+                            <input type="text" id="user_roles" name="user_roles" value="ho">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                    <button type="button" class="btn btn-success" id="userFormSubmit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="downloadAppModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cyber Trust Android App</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h3>How to install Cyber-Trust SDA on your Android device</h3>
+                    <ul class="list-group" style="text-align: left">
+                        <li class="list-group-item">1. You can install the Cyber-Trust SDA (APK files) on your Android smartphone or tablet directly from your browser.</li>
+                        <li class="list-group-item">2. <b><a href="http://172.16.4.43/static/CTAdaptor/sda.apk">Click to download </a></b> the APK file</li>
+                        <li class="list-group-item">3. You should then be able to see it downloading on the top bar of your device.</li>
+                        <li class="list-group-item">4. Once it's downloaded, open Downloads, tap on the APK file, and tap Yes when prompted.</li>
+                        <li class="list-group-item">5. The app will begin installing on your device.</li>
+                    </ul>
+
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="preloader">
+        <div id="loader"></div>
+    </div>
+</html>

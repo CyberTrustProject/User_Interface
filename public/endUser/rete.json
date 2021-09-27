@@ -1,0 +1,61 @@
+{
+  "nodes":[
+    {"id": 1, "label": "a",     "shape": "diaond",  "color":""#97C2FC"", "size":"20"},
+    {"id": 2, "label": "a",     "shape": "tringle", "color":""#97C2FC"", "size":"20"},
+    {"id": 3, "label": "a",     "shape": "tringle", "color":""#97C2FC"", "size":"20"},
+    {"id": 4, "label": "a",     "shape": "dot",     "color":""#97C2FC"", "size":"20"},
+    {"id": 5, "label": "a",     "shape": "dot",     "color":""#97C2FC"", "size":"20"},
+    {"id": 6, "label": "a",     "shape": "dot",     "color":""#97C2FC"", "size":"20"},
+    {"id": 7, "label": "a",     "shape": "dot",     "color":""#97C2FC"", "size":"20"},
+    {"id": 8, "label": "a",     "shape": "dot",     "color":""#97C2FC"", "size":"20"},
+    {"id": 9, "label": "a",     "shape": "dot",     "color":""#97C2FC"", "size":"10"},
+    {"id": 10, "label": "a",     "shape": "dot",    "color":""#97C2FC"", "size":"10"},
+    {"id": 11, "label": "a",     "shape": "dot",    "color":""#97C2FC"", "size":"10"},
+    {"id": 12, "label": "a",     "shape": "dot",    "color":""#97C2FC"", "size":"10"},
+    {"id": 13, "label": "a",     "shape": "dot",    "color":""#97C2FC"", "size":"10"},
+    {"id": 14, "label": "a",     "shape": "dot", "color":""#97C2FC"", "size":"10"},
+    {"id": 15, "label": "a",     "shape": "dot", "color":""#97C2FC"", "size":"10"},
+    {"id": 16, "label": "a",     "shape": "dot", "color":""#97C2FC"", "size":"10"},
+    {"id": 17, "label": "a",     "shape": "dot", "color":""#97C2FC"", "size":"10"},
+    {"id": 18, "label": "a",     "shape": "dot", "color":""#97C2FC"", "size":"10"},
+    {"id": 19, "label": "a",     "shape": "dot", "color":""#97C2FC"", "size":"10"},
+    {"id": 20, "label": "a",     "shape": "dot", "color":""#97C2FC"", "size":"10"},
+    {"id": 21, "label": "a",     "shape": "dot", "color":""#97C2FC"", "size":"10"},
+    {"id": 22, "label": "a",     "shape": "dot", "color":""#97C2FC"", "size":"10"},
+    {"id": 23, "label": "a",     "shape": "dot", "color":""#97C2FC"", "size":"10"},
+    {"id": 24, "label": "a",     "shape": "dot", "color":""#97C2FC"", "size":"10"},
+    ],
+  "edges":
+          [
+            {"from": 1, "to": 2, "color":{"color":"#ff0000"}},
+            {"from": 1, "to": 3, "color":{"color":"#ff0000"}},
+
+            {"from": 2, "to": 4, "color":{"color":"#ff0000"}},
+            {"from": 2, "to": 5, "color":{"color":"#ff0000"}},
+            {"from": 2, "to": 6, "color":{"color":"#ff0000"}},
+
+            {"from": 3, "to": 7, "color":{"color":"#ff0000"}},
+            {"from": 3, "to": 8, "color":{"color":"#ff0000"}},
+
+            {"from": 4, "to": 9, "color":{"color":"#ff0000"}},
+            {"from": 4, "to": 10, "color":{"color":"#ff0000"}},
+            {"from": 4, "to": 11, "color":{"color":"#ff0000"}},
+
+            {"from": 5, "to": 12, "color":{"color":"#ff0000"}},
+            {"from": 5, "to": 13, "color":{"color":"#ff0000"}},
+
+            {"from": 6, "to": 14, "color":{"color":"#ff0000"}},
+            {"from": 6, "to": 15, "color":{"color":"#ff0000"}},
+
+            {"from": 7, "to": 16, "color":{"color":"#ff0000"}},
+            {"from": 7, "to": 17, "color":{"color":"#ff0000"}},
+
+            {"from": 8, "to": 18, "color":{"color":"#ff0000"}},
+            {"from": 8, "to": 19, "color":{"color":"#ff0000"}},
+            {"from": 8, "to": 20, "color":{"color":"#ff0000"}},
+            {"from": 8, "to": 21, "color":{"color":"#ff0000"}},
+            {"from": 8, "to": 22, "color":{"color":"#ff0000"}},
+            {"from": 8, "to": 23, "color":{"color":"#ff0000"}},
+            {"from": 8, "to": 24, "color":{"color":"#ff0000"}},
+          ]
+}

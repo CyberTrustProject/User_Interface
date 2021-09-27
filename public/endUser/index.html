@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<!--
+* CoreUI - Free Bootstrap Admin Template
+* @version v2.0.0
+* @link https://coreui.io
+* Copyright (c) 2018 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://coreui.io/license)
+-->
+<html lang="en">
+<head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="Cyber Trust">
+    <meta name="author" content="Mathema srl">
+    <meta name="keyword" content="Cyber Trust by Mathema">
+    <title>Cyber Trust</title>
+    <style type="text/css">
+        #pippo {
+            width: 100%;
+            height: 400px;
+            border: 1px solid lightgray;
+            background-color:#333333;
+        }
+        p {
+            max-width:800px;
+        }
+    </style> <!-- CSS Per rete -->
+
+    <link href="../vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+    <link href="../vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+    <link href="../vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+
+    <!-- CoreUI and necessary plugins-->
+    <script src="../vendors/jquery/js/jquery.min.js"></script>
+    <script src="../vendors/popper.js/js/popper.min.js"></script>
+    <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendors/pace-progress/js/pace.min.js"></script>
+    <script src="../vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+    <script src="../vendors/@coreui/coreui-pro/js/coreui.min.js"></script>
+    <!-- Plugins and scripts required by this view-->
+    <script src="../js/custom-tooltips.min.js"></script>
+    <script src="../js/moment-with-locales.js"></script>
+
+
+    <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/jquery.form.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/vis.min.js"></script>
+    <script src="../js/sorttable.js"></script>
+    <script src="../js/bootstrap-datepicker.js"></script>
+    <script src="../host.js"></script>
+    <script src="../Common.js"></script>
+    <script src="../js/loadingMask.js"></script>
+
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="../css/vis.min.css" rel="stylesheet" type="text/css" />
+    <link href="../css/slider.css" rel="stylesheet" type="text/css" />
+    <link href="../css/tab.css" rel="stylesheet" type="text/css" />
+    <link href="../css/datepicker.css" rel="stylesheet">
+    <link href="../css/cyber.css" rel="stylesheet">
+    <link href="../css/loadingMask.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="../DataTables/datatables.min.css"/>
+    <script type="text/javascript" src="../DataTables/datatables.min.js"></script>
+    <link href='../DataTables/Buttons-1.5.6/css/buttons.dataTables.css' rel='stylesheet' type='text/css' />
+    <script src='../DataTables/jquery.dataTables.min.js' ></script>
+    <script src='../DataTables/Buttons-1.5.6/js/dataTables.buttons.min.js' type='text/javascript'></script>
+    <script src='../DataTables/Buttons-1.5.6/js/buttons.flash.min.js' ></script>
+    <script src='../js/jszip.min.js' ></script>
+    <script src='../js/pdfmake.min.js' ></script>
+    <script src='../js/vfs_fonts.js' ></script>
+    <script src='../DataTables/Buttons-1.5.6/js/buttons.html5.min.js' ></script>
+    <script src='../DataTables/Buttons-1.5.6/js/buttons.print.min.js' ></script>
+
+    <!-- Include relativi all'Owner -->
+    <script type="text/javascript" src="./dati.js"></script>
+    <script src="../Common.js"></script>
+    <script src="./index.js"></script>
+
+</head>
+<body class="app header-fixed sidebar-fixedOLD aside-menu-fixedOLD sidebar-lg-show enduser">
+<header class="app-header navbar"> <a class="navbar-brand" href="../index.html"> <img class="navbar-brand-full logo" src="img/brand/logo_bn.png" alt="CoreUI Logo"> <img class="navbar-brand-minimized" src="img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo"> </a>
+    <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item d-md-down-none" style="color: #fcfcfc"> <i class="icon-clock"></i> <span id="clock" class="clock"></span>  </li>
+        <li class="nav-item d-md-down-none" style="color: #fcfcfc">
+            <i class="icon-user"></i> <span id="user" class="user">Enduser Username</span>
+            <div class='logout' style="" id="logoutUser"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</div>
+
+        </li>
+    </ul>
+</header>
+<div class="app-body">
+    <main class="main">
+        <div style="background-color: #fcfcfc; padding: 0px 25px;">
+            <h1>Cyber Trust</h1>
+            <div>
+                <div class="form-group">
+                    <span>Home network manager</span>
+                </div>
+            </div>
+        </div>
+        <div class="panel with-nav-tabs panel-default">
+            <div class="panel-heading">
+                <ul class="nav nav-tabs">
+                    <li id="tab_device">            <a href="#tab1default" data-toggle="tab" navtab="devices"                     >Devices</a></li>
+                    <li id="tab_alerts">            <a href="#tab3default" data-toggle="tab" navtab="alerts"                     >Alerts</a></li>
+                    <li id="tab_config">            <a href="#tab4default" data-toggle="tab" navtab="config"                     >Config</a></li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane fade in"        id="tab1default" bodytab="devices" style="background-color: #fcfcfc" >
+                        <div id="listaDevice"  jmdevices="lista" style=" margin-top: 10px">
+                            <div id="headerDevice" style=" margin-top: 10px; text-align: right">
+                                <button jmRefresh="devices" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                            </div>
+                            <h1>Device List</h1>
+                            <table id="devicesTable" class="cell-border compact stripe" style="width:100%">
+                                <thead class="tabHeader">
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Type</th>
+                                    <th>Owner</th>
+                                    <th>OS</th>
+                                    <th>Manufacturer</th>
+                                    <th>Model</th>
+                                </tr>
+                                </thead>
+                                <tbody jmTable="boxRows">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="nuovoDevice" style="display: none;margin-top: 10px">
+                            <div style="background-color: #fcfcfc">
+                                <h1>New Device</h1>
+                                <div class="form-group">
+                                    <label>Device ID: </label><input type="text" class="form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>MAC address: </label><input type="text" class="form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Device name: </label><input type="text" class="form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Connection interface: </label>
+                                    <select class="form-control">
+                                        <option selected>Choose a type of connection</option>
+                                        <option>WI-FI</option>
+                                        <option>Cable</option>
+                                        <option>Bluethoot</option>
+                                        <option>Wi-Fi/Bluethoot</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Class: </label>
+                                    <select class="form-control">
+                                        <option selected>Choose a class</option>
+                                        <option>Class I</option>
+                                        <option>Class II</option>
+                                        <option>Class III</option>
+                                        <option>Class IV</option>
+                                    </select>
+                                </div>
+                                <div class="form-actions">
+                                    <input type="button" value="Confirm"    backDevice class="btn btn-success"/>
+                                    <input type="button" value="Cancel"     backDevice class="btn btn-default"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div id=datiDevice      jmdevices="dati" style="display: none;">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active" aria-current="page" onclick="displayGes('devices');"><a href="#">Devices List</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page" id="bc_device"></li>
+                                </ol>
+                            </nav>
+                            <form id="deviceDataShow">
+                                <div>
+                                    <h4>Device</h4>
+                                    <div class="form-group col-md-offset-1">
+                                        <label>Type: </label>
+                                        <span jmDataShow="type"></span>
+                                        <input type="text" jmDataMod="type" name = 'type' class="form-control" placeholder="Device Type"/>
+                                    </div>
+                                    <div class="form-group col-md-offset-1">
+                                        <label>Owner: </label>
+                                        <span jmDataShow="user"></span>
+                                        <input type="text" jmDataMod="user" name = 'user' class="form-control" placeholder="Owner"/>
+                                    </div>
+                                    <div class="form-group col-md-offset-1">
+                                        <label>CPE: </label>
+                                        <span jmDataShow="CPE"></span>
+                                        <input type="text" jmDataMod="CPE" name = 'CPE' class="form-control" placeholder="CPE"/>
+                                    </div>
+                                    <div class="form-group col-md-offset-1">
+                                        <label>Creation date: </label>
+                                        <span jmDataShow="_insertedTimestamp"></span>
+                                        <input type="text" jmDataMod="_insertedTimestamp" name = '_insertedTimestamp' class="form-control" placeholder="Creation date"/>
+                                    </div>
+                                </div>
+                                <div >
+                                    <h4>Hardware</h4>
+                                    <div class="form-group col-md-offset-1">
+                                        <label>Manufacturer: </label>
+                                        <span jmDataShow="manufacturer"></span>
+                                        <input type="text" jmDataMod="manufacturer" name = 'manufacturer' class="form-control" placeholder="Manufacturer"/>
+                                    </div>
+                                    <div class="form-group col-md-offset-1">
+                                        <label>Model: </label>
+                                        <span jmDataShow="model"></span>
+                                        <input type="text" jmDataMod="model" name = 'model' class="form-control" placeholder="Model"/>
+                                    </div>
+                                    <div class="form-group col-md-offset-1">
+                                        <label>Hardware ID: </label>
+                                        <span jmDataShow="hardware_id"></span>
+                                        <input type="text" jmDataMod="hardware_id" name = 'hardware_id' class="form-control" placeholder="Hardware ID"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4>Software</h4>
+                                    <div class="form-group col-md-offset-1">
+                                        <label>OS Name: </label>
+                                        <span jmDataShow="os_name"></span>
+                                        <input type="text" jmDataMod="os_name" name = 'os_name' class="form-control" placeholder="OS Name"/>
+                                    </div>
+                                    <div class="form-group col-md-offset-1">
+                                        <label>Version Release: </label>
+                                        <span jmDataShow="version_release"></span>
+                                        <input type="text" jmDataMod="version_release" name = 'version_release' class="form-control" placeholder="Version Release"/>
+                                    </div>
+                                    <div class="form-group col-md-offset-1">
+                                        <label>SDK: </label>
+                                        <span jmDataShow="sdk"></span>
+                                        <input type="text" jmDataMod="sdk" name = 'sdk' class="form-control" placeholder="SDK"/>
+                                    </div>
+                                </div>
+                                <div class="form-actions" style="text-align: center">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal" jmbutton="modify"    jmdDataRead>Modify</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal" jmbutton="confirm"   jmDataMod>Confirm</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade in"        id="tab3default" bodytab="alerts"  style="background-color: #fcfcfc" >
+                        <div id=listaAlerts jmAlerts="lista" style=" margin-top: 10px">
+                            <div id="headerAlerts" style=" margin-top: 10px; text-align: right">
+                                <button jmRefresh="alerts"  class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                            </div>
+                            <h1>Alerts</h1>
+                            <table id="alertsTable" class="cell-border compact stripe" style="width:100%">
+                                <thead class="tabHeader">
+                                <tr>
+                                    <th>Device</th>
+                                    <th>Type</th>
+                                    <th>CPU%</th>
+                                    <th>MEM%</th>
+                                    <th>Date</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id=datiAlerts     jmAlerts="dati" style="display: none;" >
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active" aria-current="page" onclick="displayGes('alerts');"><a href="#">Alerts List</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page" id="bc_alerts"></li>
+                                </ol>
+                            </nav>
+                            <form id="alertsDataShow">
+                                <div>
+                                    <h4>Alerts</h4>
+                                    <div class="form-group col-md-offset-1">
+                                        <label>Type: </label>
+                                        <span jmDataShow="alertType"></span>
+                                        <input type="text" jmDataMod="alertType" name = 'alertType' class="form-control" placeholder="Alert Type"/>
+                                    </div>
+                                    <div class="form-group col-md-offset-1">
+                                        <label>Device Type: </label>
+                                        <span jmDataShow="deviceType"></span>
+                                        <input type="text" jmDataMod="deviceType" name = 'deviceType' class="form-control" placeholder="Device Type"/>
+                                    </div>
+                                </div>
+                                <div >
+                                    <h4>Hardware Data</h4>
+                                    <div class="form-group col-md-offset-1">
+                                        <label>Internal Storage: </label>
+                                        <span jmDataShow="int_stor"></span>
+                                        <input type="text" jmDataMod="int_stor" name = 'int_stor' class="form-control" placeholder="Internal Storage"/>
+                                    </div>
+                                    <div class="form-group col-md-offset-1">
+                                        <label>External Storage: </label>
+                                        <span jmDataShow="ext_stor"></span>
+                                        <input type="text" jmDataMod="ext_stor" name = 'ext_stor' class="form-control" placeholder="Internal Storage"/>
+                                    </div>
+                                    <div class="form-group col-md-offset-1">
+                                        <label>CPU usage: </label>
+                                        <span jmDataShow="cpu_usage"></span>
+                                        <input type="text" jmDataMod="cpu_usage" name = 'cpu_usage' class="form-control" placeholder="Internal Storage"/>
+                                    </div>
+                                    <div class="form-group col-md-offset-1">
+                                        <label>Memory usage: </label>
+                                        <span jmDataShow="mem_usage"></span>
+                                        <input type="text" jmDataMod="mem_usage" name = 'mem_usage' class="form-control" placeholder="Internal Storage"/>
+                                    </div>
+                                </div>
+                                <div class="form-actions" style="text-align: center">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal" jmbutton="modify"    jmdDataRead>Modify</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal" jmbutton="confirm"   jmDataMod>Confirm</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade in"        id="tab4default" bodytab="config" style="background-color: #fcfcfc">
+                        <div style=" margin-top: 10px" >
+                            <h1>Configuration</h1>
+                            <div class="container-fluid" style="border: 1px solid #ccc;padding: 25px;margin-top: 25px;">
+                                <div>
+                                    <label>Automatic Configuration: </label><br />
+                                    <label class="switch switch-label switch-success">
+                                        <input class="switch-input" type="checkbox" checked="">
+                                        <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+                                    </label>
+                                </div>
+                                <hr />
+                                <div style="margin-bottom: 20px;">
+                                    <label><strong>Name:</strong></label><br>
+                                    <span>
+                                Emanuele Bellini</span>
+                                </div>
+                                <div style="margin-bottom: 20px;">
+                                    <label><strong>Address:</strong></label><br>
+                                    <span>
+                                Via Torcicoda 29, Florence, Italy</span>
+                                </div>
+                                <div style="margin-bottom: 20px;">
+                                    <label><strong>Registration Date:</strong></label><br>
+                                    <span>12/01/2018</span>
+                                </div>
+                                <div style="margin-bottom: 20px;">
+                                    <label><strong>ISP:</strong></label><br>
+                                    <span>
+                                Vodafone Italy</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<div>
+    <!-- Modal -->
+    <!-- AddUser -->
+    <div id="newUserModal" class="modal fade" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">New user</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="userForm">
+                        <div class="form-group">
+                            <label>Name: </label><input type="text" id="user_firstname" name = 'firstname' class="form-control" placeholder="Name"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Surname: </label><input type="text" id="user_lastName" name="lastName" class="form-control" placeholder="Surname"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Email: </label><input type="text" id="user_email" name="email" class="form-control" placeholder="Email"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Date of birth: </label><input type="text" id="user_dateofbirth" name="dateofbirth" class="form-control" placeholder="YYYY/MM/DD"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Telephone: </label><input type="text" id="user_telephone" name="telephone" class="form-control" placeholder="Telephone"/>
+                        </div>
+                        <!--<div class="form-group">
+                            <label>Nickname: </label><input type="text" id="user_givenName" name="givenName" class="form-control" placeholder="Name"/>
+                        </div>-->
+                        <div class="form-group">
+                            <label>Username: </label><input type="text" id="user_username" name="username" class="form-control" placeholder="Username"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Password: </label><input type="text" id="user_password" name="password" class="form-control" placeholder="Password"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Role: </label>
+                            <select type="text" id="user_role" name="role" class="form-control">
+                                <option value="ISP">ISP</option>
+                                <option value="LEA">LEA</option>
+                            </select>
+                        </div>
+                        <div class="form-actions" style="text-align: center">
+                            <button type="button" id="submitUser" class="btn btn-success" >Submit</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Dismiss</button>
+                        </div>
+                    </form>
+                </div>
+                <!--
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+                -->
+            </div>
+
+        </div>
+    </div><!-- AddUser -->
+    <!-- Vulnerability -->
+    <div id="vulnerabilityData" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="vulnerabilityName"></h4>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,640 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="Cyber Trust">
+    <meta name="author" content="Mathema srl">
+    <meta name="keyword" content="Cyber Trust by Mathema">
+    <title>Cyber Trust</title>
+    <!-- CSS -->
+    <!-- Bootstrap -->
+    <link href="../js2/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <!-- Dashboard -->
+    <link href="../css2/dashboard_owner.css" rel="stylesheet" id="dashboard-css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <!-- Datepicker -->
+    <link href="../css2/jquery.datetimepicker.min.css" rel="stylesheet">
+    <!-- Various -->
+    <link href="../css2/cybertrust.css" rel="stylesheet" id="cybertrust-css">
+    <!-- DataTable -->
+    <link rel="stylesheet" type="text/css" href="../js2/DataTables/datatables.min.css"/>
+    <!-- GoldenLayout -->
+    <link type="text/css" rel="stylesheet" href="../js2/goldenLayout/goldenlayout-base.css" />
+    <link type="text/css" rel="stylesheet" href="../js2/goldenLayout/goldenlayout-light-theme.css" />
+    <!-- ChartJS -->
+    <link type="text/css" rel="stylesheet" href="../js2/ChartJS/Chart.min.css"/>
+    <!-- Slider -->
+    <link href="../css2/slider.css" rel="stylesheet" type="text/css" />
+<!-- Slider -->
+    <link href="../css2/bootstrap-slider.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="fixed-sn light-blue-skin">
+<!-- MAIN DASHBOARD -->
+<div class="container-fluid">
+<div class="row" style="height: 100%;">
+    <div class="col-md-2 col-sm-1" id="navigation">
+        <div class="logo">
+            <a hef="home.html"><img src="../images/logo_cybertrust.png" alt="cybertrust_logo" class="hidden-xs hidden-sm"></a>
+        </div>
+        <div class="navi">
+            <ul>
+                <li target='dashData' class="active">  <a href="javascript:void(0)">    <i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home environment</span></a></li>
+                <li target='dashSettings'>                      <a href="javascript:void(0)">    <i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Settings</span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-10 col-sm-11 contentbox">
+        <div class="adminPalette container-width-fluid" >
+            <a id="sohoName" class="navbar-brand adminPalette" href="javascript:void(0);">Home owner</a>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light adminPalette ml-auto" >
+                <li class="nav-item d-md-down-none" style="text-align: right;" >
+                    <div class='logout' id="logoutUser"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</div>
+                </li>
+            </nav>
+        </div>
+        <div class="user-dashboard" landing="dashData">
+            <h1>Home environment</h1>
+            <div>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="javascript:void(0);" dd_target='tabDevices'>Devices</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);" dd_target='tabAlerts'>Notifications <span class="badge badge-pill badge-danger" id="numberAlert">0</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);" dd_target='tabMitigation'>Mitigations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0);" dd_target='tabNetwork'>Network</a>
+                    </li>
+                </ul>
+                <div >
+                    <div class="user-dashboard" dd_landing="tabDevices">
+                        <h1>Devices</h1>
+                        <div>
+                            <ol class="breadcrumb breadcrumb-arrow" id="breadcrumbDevices">
+                                <li><a href="javascript:void(0)" displayer displayLabel="devices" displayMode="list">Devices list</a></li>
+                            </ol>
+                        </div>
+                        <div label="devices" mode="list">
+                            <div id='preloader_deviceList' class=preloader_parent style="display:none"><div class=loader></div></div>
+                            <div id="deviceList">
+                                <div id="headerDevice" style=" margin-top: 10px; text-align: right">
+                                    <button type="button" class="btn btn-primary" id="addDevices" displayer displayLabel="devices" displayMode="form" adder="device">Add new device</button>
+                                    <button jmRefresh="devices" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                                </div>
+                                <div class="row" id="deviceListRow">
+                                    <table id="devicesTable" class="tabella cell-border compact stripe tabella" style="width:100%">
+                                        <thead class="tabHeader">
+                                        <tr>
+                                            <th>Manufacturer</th>
+                                            <th>Model</th>
+                                            <th>Description</th>
+                                            <th>Type</th>
+                                            <th>Trust Level</th>
+                                            <th>Risk Level</th>
+                                            <th>Criticality</th>
+                                            <th>OS</th>
+                                            <!-- <th>Patching status</th> -->
+                                        </tr>
+                                        </thead>
+                                        <tbody jmTable="boxRows">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div label="devices" mode="form">
+                            <div id='preloader_deviceForm' class=preloader_parent style="display:none"><div class=loader></div></div>
+                            <form id="addDeviceForm">
+                                <div class="form-group">
+                                    <div id="deviceFormStatus" style="display:none;">
+                                        <h4>Status</h4>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Actual status:</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_monitoring_status" name="device_status" disabled>
+                                                <input type="button" value="Active monitoring" id="devicemonitoringSubmit" class="btn btn-success"  />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="deviceFormGeneric">
+                                        <h4>Device data</h4>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Description</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_description" name="device_description" toValidate="required">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">CPE</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_cpe" name="device_cpe" toValidate="required">
+                                            </div>
+                                            <div class="input-group mb-3 col">
+                                                <select class="form-control form-control-lg" id="device_type" name="device_type" placeholder="Select an option" readonly  toValidate="required">
+                                                    <option value="smartphone">Smartphone</option>
+                                                    <option value="router">Router</option>
+                                                    <option value="general">General</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="deviceFormHW">
+                                        <h4>Hardware information</h4>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Manufacture</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_device_info_manufacturer" name="device_device_info_manufacturer" toValidate="required">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Model</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_device_info_model" name="device_device_info_model" toValidate="required">
+                                            </div>
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Identifier</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_device_info_hardware_id" name="device_device_info_hardware_id" toValidate="required">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col-5">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">IP Address</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_ip" name="device_ip" toValidate="required">
+                                            </div>
+                                            <div class="input-group mb-3 col-5">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Mac Address</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_mac" name="device_mac" toValidate="required">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="deviceFormOS">
+                                        <h4>OS configuration</h4>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Operative System</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_device_info_os_name" name="device_device_info_os_name" toValidate="required">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Version</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_device_info_os_version" name="device_device_info_os_version" toValidate="required">
+                                            </div>
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">SDK</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_device_info_os_sdk" name="device_device_info_os_sdk" toValidate="required">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="deviceSecurity" formAdd='false'>
+                                        <h4>Security status</h4>
+                                        <div class="row">
+                                            <!--<div class="input-group mb-3 col-4">
+                                                <label>Patch</label>
+                                                <canvas id="gaugePatchLvl" ></canvas>
+                                            </div> -->
+                                            <div class="input-group mb-3 col-4">
+                                                <label>Trust level</label>
+                                                <canvas id="gaugeTrust" ></canvas>
+                                            </div>
+                                            <div class="input-group mb-3 col-4">
+                                                <label>Risk level</label>
+                                                <canvas id="gaugeRisk" ></canvas>
+                                            </div>
+                                            <div class="input-group mb-3 col-4">
+                                                <label>Criticality</label>
+                                                <canvas id="gaugeImpact" ></canvas>
+                                                <input type="button" value="Change" id="changeImpact" class="btn btn-warning" formRead='true'/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div hidden>
+                                    <input name="todo"/>
+                                    <input name="smarthome_id" />
+                                    <input name="device_userId"/>
+                                    <input name="device_userType" value="OWNER"/>
+                                    <input name="token"/>
+                                </div>
+                                <div class="form-actions">
+                                    <input type="button" value="Submit" id="deviceFormSubmit" class="btn btn-success"   formRead='false'/>
+                                    <!-- <input type="button" value="Modify" id="deviceFormMod"      class="btn btn-success" formMod='false'/>-->
+                                    <input type="button" value="Back"   id="deviceFormCancel" class=" btn btn-default"  displayer displayLabel="devices" displayMode="list"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="user-dashboard" dd_landing="tabAlerts">
+                        <h1>Alerts raised</h1>
+                        <div>
+                            <ol class="breadcrumb breadcrumb-arrow" id="breadcrumbNotifications">
+                                <li><a href="javascript:void(0)" displayer displayLabel="alerts" displayMode="list">Alert list</a></li>
+                            </ol>
+                        </div>
+                        <div label="alerts" mode="list">
+                            <div id="headerAlerts" style=" margin-top: 10px; text-align: right">
+                                <button jmRefresh="alerts" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                            </div>
+                            <div class="row">
+                                <table id="alertsTable" class="tabella cell-border compact stripe tabella" style="width:100%">
+                                    <thead class="tabHeader">
+                                    <tr>
+                                        <th>Notification</th>
+                                        <th>Threat level</th>
+                                        <th>Type</th>
+                                        <th>Date relevated</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody jmTable="boxRows">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div label="alerts" mode="form">
+                            <form id="AlertForm">
+                                <div class="form-group">
+                                    <div id="notificationForm">
+                                        <div class="row">
+                                            <div class="input-group mb-3 col-6">
+                                                <input type="text" class="form-control" notification="tip" id="notification_tip" name="notification_tip" toValidate="required">
+                                            </div>
+                                            <div class="input-group mb-3 col-2"></div>
+                                            <div class="input-group mb-3 col-4">
+                                                <img src="" id="notification_img" height="50px">
+                                                <input type="text" class="form-control" notification="timestamp" id="notification_timestamp" name="notification_timestamp" toValidate="required">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group col-10">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Description</span>
+                                                </div>
+                                                <textarea type="text" class="form-control" notification="description" id="notification_description" name="notification_description" toValidate="required"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group col-6">
+                                                <label>Treath Level</label>
+                                                <canvas id="gaugeThreat" ></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <input type="button" value="Submit" id="alertsFormSubmit" class="btn btn-success"/>
+                                    <input type="button" value="Back"   id="alertsFormCancel" class="btn btn-default" displayer displayLabel="alerts" displayMode="list"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="user-dashboard" dd_landing="tabMitigation">
+                        <h1>Mitigations</h1>
+                        <div>
+                            <ol class="breadcrumb breadcrumb-arrow" id="breadcrumbMitigations">
+                                <li><a href="javascript:void(0)" displayer displayLabel="alerts" displayMode="list">Mitigations list</a></li>
+                            </ol>
+                        </div>
+                        <div label="mitigations" mode="list">
+                            <div id="headerMitigations" style=" margin-top: 10px; text-align: right">
+                                <button jmRefresh="mitigations" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                            </div>
+                            <div class="row">
+                                <table id="mitigationsTable" class="tabella cell-border compact stripe tabella" style="width:100%">
+                                    <thead class="tabHeader">
+                                    <tr>
+                                        <th>Affected hosts</th>
+                                        <th>Rules</th>
+                                        <th>Mode</th>
+                                        <th>Date relevated</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody jmTable="boxRows">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div label="mitigations" mode="form">
+                            <form id="MitigationForm">
+                                <div class="form-group">
+                                    <div >
+                                        <h4>AffectedHosts</h4>
+                                        <div id="hostList">
+                                            <div class="row" jmMitigation="hostRow">
+                                                <div class="input-group mb-3 col-6">
+                                                    <label>Hostname:</label>
+                                                    <input type="text" jmMitigation="hostname">
+                                                </div>
+                                                <div class="input-group mb-3 col-6">
+                                                    <label>IP address:</label>
+                                                    <input type="text" jmMitigation="ip">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div >
+                                        <h4>Mitigations</h4>
+                                        <div id="mitigationList">
+                                            <div class="input-group mb-3 col-6">
+                                                <label>Status:</label>
+                                                <label jmMitigation="mode"></label>
+                                            </div>
+                                            <h4>Pfsense affected</h4>
+                                            <div id="pfsenseList">
+                                                <div class="row" jmMitigation="pfsenseRow">
+                                                    <div class="input-group mb-3 col-9">
+                                                        <input type="text" jmMitigation="pfsense">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h4>Rules applied</h4>
+                                            <div id="rulesList">
+                                                <div class="row" jmMitigation="rulesRow">
+                                                    <div class="input-group mb-3 col-9">
+                                                        <input type="text" jmMitigation="rule">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="application">
+                                        <h2>Application</h2>
+                                        <div class="row">
+                                            <input type="button" value="Apply mitigation"   id="mitigationApplication" class="btn btn-success"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <input type="button" value="Back"   id="mitigationFormCancel" class="btn btn-default" displayer displayLabel="mitigation" displayMode="list"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="user-dashboard" style="display:none" dd_landing="tabNetwork" dashboard>
+                        <h1>Network</h1>
+                        <button id="refreshNetwork" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                        <div id="mynetwork" class="networkMap"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="user-dashboard" landing="dashSettings">
+            <h1>Personal settings</h1>
+            <ul class="nav nav-tabs">
+                <li class="nav-item active">
+                    <a class="nav-link active" href="javascript:void(0);" st_target='tabNotification'>SOHO settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);" st_target='tabMyData'>My Data</a>
+                </li>
+            </ul>
+            <div >
+                <div class="user-dashboard" st_landing="tabNotification">
+                    <h1>Smart Home Settings</h1>
+                    <form id="">
+                        <div id="automode">
+                            <h4>Auto mode</h4>
+                            <div class="row align-items-center">
+                                <div class="input-group mb-3 col-6">
+                                    <label>Auto mode is currently </label>
+                                </div>
+                                <div class="input-group mb-3 col-6">
+                                    <input type="checkbox" id="automodeTrigger" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="mainoptions">
+                            <h4>Patch cost</h4>
+                            <label>Level of patch cost: </label>
+                            <div class="row align-items-center">
+                                <div class="input-group mb-3 col-6">
+                                    <input id="patchSlider" type="text" data-slider-value="0"/>
+                                </div>
+                                <div class="input-group mb-3 col-6">
+                                    <canvas id="gaugeSliderPatch" height="150" width="300"></canvas>
+                                </div>
+                            </div>
+                            <h4>Firewall cost</h4>
+                            <label>Level of firewall cost: </label>
+                            <div class="row align-items-center">
+                                <div class="input-group mb-3 col-6">
+                                    <input id="firewallSlider" type="text" data-slider-value="0"/>
+                                </div>
+                                <div class="input-group mb-3 col-6">
+                                    <canvas id="gaugeSliderFirewall" height="150" width="300"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tradeOffOptions">
+                            <h4>Availability</h4>
+                            <label>Level of availability: </label>
+                            <div class="row align-items-center">
+                                <div class="input-group mb-3 col-6">
+                                    <input id="availabilitySlider" type="text" data-slider-value="0"/>
+                                </div>
+                                <div class="input-group mb-3 col-6">
+                                    <canvas id="gaugeSliderAvailability" height="150" width="300"></canvas>
+                                </div>
+                            </div>
+                            <h4>Performance</h4>
+                            <label>Level of performance: </label>
+                            <div class="row align-items-center">
+                                <div class="input-group mb-3 col-6">
+                                    <input id="performanceSlider" type="text" data-slider-value="0"/>
+                                </div>
+                                <div class="input-group mb-3 col-6">
+                                    <canvas id="gaugeSliderPerformance" height="150" width="300"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <input type="button" value="Submit" id="settingsFormSubmit" class="btn btn-success"/>
+                            <input type="button" value="Please wait..." id="settingsFormWait" class="btn btn-secondary" style="display:none"/>
+                            <!--<input type="button" value="Back"   id="settingFormCancel" class="btn btn-default" displayer displayLabel="alerts" displayMode="list"/> -->
+                        </div>
+                    </form>
+                </div>
+                <div class="user-dashboard" st_landing="tabMyData" style="display:none;">
+                    <form id="addUserForm">
+                        <div class="form-group">
+                            <div id="userFormPersonalData">
+                                <h4>Personal Data</h4>
+                                <div class="row">
+                                    <div class="input-group mb-3 col">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Name</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="user_firstname" name="user_firstname"  placeholder="Firstname" toValidate="required" toMod>
+                                    </div>
+                                    <div class="input-group mb-3 col">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" >Surname</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="user_lastname" name="user_lastname" placeholder="Lastname" toValidate="required" toMod>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-group mb-3 col">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" >Date of birth</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="user_dateofbirth" name="user_dateofbirth" placeholder="DD-MM-YYYY" readonly toValidate="required">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="userFormContacts">
+                                <h4>Contacts</h4>
+                                <div class="row">
+                                    <div class="input-group mb-3 col">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Email</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="user_email" name="user_email" placeholder="example@mail.com" toValidate="required email"  toMod/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-group mb-3 col">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" >Telephone</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="user_telephone" name="user_telephone" placeholder="+## XXX YYY YYY YYYYY"  toValidate="required" toMod>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <input type="button" value="Submit" id="userFormSubmit" class="btn btn-success" style="display: none"/>
+                            <input type="button" value="Back"   id="userFormBack"    class="btn btn-warning" style="display: none"/>
+                            <!-- <input type="button" value="Modify" id="userFormMod"    class="btn btn-warning" />-->
+                            <!--<input type="button" value="Back"   id="userFormCancel" class="btn btn-default" displayer displayLabel="users" displayMode="list"/-->
+                        </div>
+                        <div hidden>
+                            <input name="token"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--</div> -->
+    </div>
+</div>
+<!-- /MAIN DASHBOARD -->
+<!-- MODAL -->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Log out</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure to leave the <b>Cyber Trust</b> platform?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-primary" id="execLogout">Logout</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="impactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Level of criticality</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <h4>Level of criticality</h4>
+                    <div class="row">
+                        <div class="input-group mb-3 col-12">
+                            <select class="form-control form-control-lg" id="impactSelect">
+                                <option value="1">Negligible</option>
+                                <option value="2">Minor</option>
+                                <option value="3">Normal</option>
+                                <option value="4">Severe</option>
+                                <option value="5">Catastrophic</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="confirmImpact">Confirm</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/MODAL/-->
+</body>
+<!-- Jquery -->
+<script type="text/javascript" src="../js2/jquery-3.4.1.min.js"></script>
+<!-- AjaxForm -->
+<script type="text/javascript" src="../js2/jquery.form.min.js"></script>
+<!-- Popper -->
+<script type="text/javascript" src="../js2/popper/popper.min.js"></script>
+<!-- Bootstrap -->
+<script type="text/javascript" src="../js2/bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTable Full -->
+<script type="text/javascript" src="../js2/DataTables/datatables.min.js"></script>
+<!-- Datepicker -->
+<script src="../js2/jquery.datetimepicker.full.min.js"></script>
+<!-- Validator -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+<!-- GoldenLayout -->
+<!-- <script type="text/javascript" src="../js2/goldenLayout/goldenlayout.min.js"></script> -->
+<!-- ChartJS -->
+<script type="text/javascript" src="../js2/ChartJS/Chart.bundle.min.js"></script>
+<!-- Gauge -->
+<script type="text/javascript" src="../js2/Gauge/gauge.min.js"></script>
+<!-- Moment -->
+<script type="text/javascript" src="../js2/moment.min.js"></script>
+<!-- Slider -->
+<script src="../js2/bootstrap-slider.min.js"></script>
+<!--Vis -->
+<script src="../js2/vis-network.min.js"></script>
+<!-- Pagina -->
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+<script type="text/javascript" src="../js2/Common.js"></script>
+<script type="text/javascript" src="home_owner.js"></script>
+<script type="text/javascript" src="../js2/profilingServices.js"></script>
+<script type="text/javascript" src="Networks.js"></script>
+<script src="../host.js"></script>
+</html>

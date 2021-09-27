@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="Cyber Trust">
+    <meta name="author" content="Mathema srl">
+    <meta name="keyword" content="Cyber Trust by Mathema">
+    <title>Cyber Trust</title>
+    <!-- CSS -->
+    <!-- Bootstrap -->
+    <link href="../js2/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <!-- Dashboard -->
+    <link href="../css2/dashboard.css" rel="stylesheet" id="dashboard-css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <!-- Datepicker -->
+    <link href="../css2/jquery.datetimepicker.min.css" rel="stylesheet">
+    <!-- Various -->
+    <link href="../css2/cybertrust.css" rel="stylesheet" id="cybertrust-css">
+    <!-- DataTable -->
+    <link rel="stylesheet" type="text/css" href="../js2/DataTables/datatables.min.css"/>
+    <!-- GoldenLayout -->
+    <link type="text/css" rel="stylesheet" href="../js2/goldenLayout/goldenlayout-base.css" />
+    <link type="text/css" rel="stylesheet" href="../js2/goldenLayout/goldenlayout-light-theme.css" />
+    <!-- ChartJS -->
+    <link type="text/css" rel="stylesheet" href="../js2/ChartJS/Chart.min.css"/>
+    <!-- Toggle -->
+    <link type="text/css" rel="stylesheet" href="../css2/bootstrap-toggle.min.css"/>
+</head>
+<div id="preloader">
+    <div id="loader"></div>
+</div>
+<body class="fixed-sn light-blue-skin">
+<!-- MAIN DASHBOARD -->
+<div class="container-fluid">
+    <div class="row" style="height: 100%;">
+    <div class="col-md-2 col-sm-1" id="navigation">
+        <div class="logo">
+            <a hef="home.html"><img src="../images/logo_cybertrust.png" alt="cybertrust_logo" class="hidden-xs hidden-sm"></a>
+        </div>
+        <div class="navi">
+            <ul>
+                <li target='dashProfiling' class="active">  <a href="javascript:void(0)">    <i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Platform management</span></a></li>
+                <li target='dashMisp'>                      <a href="javascript:void(0)">    <i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">MISP statistics</span></a></li>
+                <li> <a href="http://172.16.4.38:8088/" target="_blank" rel="noopener noreferrer"> <img src="../images/mispLogo.png" height="40px;"/> Control panel</a></li>
+                <li target='dashCrawler'>                   <a href="javascript:void(0)">    <i class="fa fa-pie-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Crawler</span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-10 col-sm-11 contentbox">
+        <div class="adminPalette container-width-fluid" >
+            <a class="navbar-brand adminPalette" href="javascript:void(0);">Administrator</a>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light adminPalette ml-auto" >
+                <li class="nav-item d-md-down-none" style="text-align: right;" >
+                    <div class='logout' id="logoutUser"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</div>
+                </li>
+            </nav>
+        </div>
+        <div class="user-dashboard" landing="dashProfiling">
+            <h1>PLATFORM MANAGEMENT</h1>
+            <div>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item" >
+                        <a class="nav-link active" href="javascript:void(0);" ps_target='tabUsers'>Registered accounts</a>
+                    </li>
+                </ul>
+            </div>
+            <div >
+                <div class="user-dashboard" ps_landing="tabUsers">
+                    <!-- Ich weiß es nicht -->
+                    <h1>Registered accounts</h1>
+                    <div>
+                        <ol class="breadcrumb breadcrumb-arrow" id="breadcrumbUsers">
+                            <li><a href="javascript:void(0)" displayer displayLabel="users" displayMode="list">Account list</a></li>
+                            <!--
+                            <li><a href="#">Library</a></li>
+                            <li class="active"><span>Data</span></li>
+                            -->
+                        </ol>
+                    </div>
+                    <div label="users" mode="list">
+                        <div id="headerUtenti" style=" margin-top: 10px; text-align: right">
+                            <button type="button" class="btn btn-primary" id="addUser" displayer displayLabel="users" displayMode="form">Add new user</button>
+                            <button jmRefresh="tabUsers" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                        </div>
+                        <div class="row">
+                            <table id="usersTable" class="tabella display cell-border compact stripe" style="width:100%">
+                                <thead class="tabHeader">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Surname</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Telephone</th>
+                                </tr>
+                                </thead>
+                                <tbody jmTable="boxRows">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div label="users" mode="form">
+                        <form id="addUserForm">
+                            <div class="form-group">
+                                <div id="userFormPersonalData">
+                                    <h4>Personal Data</h4>
+                                    <div class="row">
+                                        <div class="input-group mb-3 col">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Name</span>
+                                            </div>
+                                            <input type="text" class="form-control" id="user_firstname" name="user_firstname"  placeholder="Firstname" toValidate="required">
+                                        </div>
+                                        <div class="input-group mb-3 col">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" >Surname</span>
+                                            </div>
+                                            <input type="text" class="form-control" id="user_lastname" name="user_lastname" placeholder="Lastname" toValidate="required">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-group mb-3 col">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" >Date of birth</span>
+                                            </div>
+                                            <input type="text" class="form-control" id="user_dateofbirth" name="user_dateofbirth" placeholder="DD-MM-YYYY" readonly toValidate="required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="userFormContacts">
+                                    <h4>Contacts</h4>
+                                    <div class="row">
+                                        <div class="input-group mb-3 col">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Email</span>
+                                            </div>
+                                            <input type="text" class="form-control" id="user_email" name="user_email" placeholder="example@mail.com" toValidate="required email"/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-group mb-3 col">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" >Telephone</span>
+                                            </div>
+                                            <input type="text" class="form-control" id="user_telephone" name="user_telephone" placeholder="+## XXX YYY YYY YYYYY"  toValidate="required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="userFormCredentials">
+                                    <h4>Credentials</h4>
+                                    <div class="row">
+                                        <div class="input-group mb-3 col">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="user_roles_button">User Role</button>
+                                                <div class="dropdown-menu" id="userRoleMenu">
+                                                    <a class="dropdown-item" href="javascript:void(0)" roleOption="Administrator">Administrator</a>
+                                                    <a class="dropdown-item" href="javascript:void(0)" roleOption="LEA">LEA</a>
+                                                    <a class="dropdown-item" href="javascript:void(0)" roleOption="ISP">ISP</a>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" aria-label="" id="user_roles" name="user_roles" placeholder="Select an option" readonly  toValidate="required">
+                                        </div>
+                                    </div>
+                                    <div class="row" formRead='false'>
+                                        <div class="input-group mb-3 col">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Username</span>
+                                            </div>
+                                            <input type="text" class="form-control" id="user_username" name="user_username" aria-describedby="basic-addon3" placeholder="Username" toValidate="required" unique='username'>
+                                        </div>
+                                        <div class="input-group mb-3 col">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" >Password</span>
+                                            </div>
+                                            <input type="password" class="form-control" id="user_password" name="user_password" placeholder="Password"  toValidate="required password">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <input type="button" value="Submit" id="userFormSubmit" class="btn btn-success" formRead='false'/>
+                                <input type="button" value="Back"   id="userFormCancel" class="btn btn-default" displayer displayLabel="users" displayMode="list"/>
+                                <input type="button" value="Delete"   id="userFormDelete" class="btn btn-danger" displayer displayLabel="users" displayMode="list"/>
+                                <!-- <input type="button" value="Modify" id="deviceFormModify" class="btn btn-secondary" modifier displayLabel="users" style="display: none"/>-->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="user-dashboard" landing="dashMisp">
+            <h1>MISP</h1>
+            <div class="user-dashboard">
+                <div>
+                    <ol class="breadcrumb breadcrumb-arrow" id="breadcrumbCVE">
+                        <li><a href="javascript:void(0)" displayer displayLabel="cves" displayMode="list">CVes list</a></li>
+                    </ol>
+                </div>
+                <div label="cves" mode="list">
+                    <div id="headerCVE" style=" margin-top: 10px; text-align: right">
+                        <button jmRefresh="tabcve" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                    </div>
+                    <div class="row">
+                        <table id="cveTable" class="tabella display cell-border compact stripe" style="width:100%">
+                            <thead class="tabHeader">
+                            <tr>
+                                <th>CVE</th>
+                                <th>Score</th>
+                                <th>Source</th>
+                                <th>Published</th>
+                            </tr>
+                            </thead>
+                            <tbody jmTable="boxRows">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-6">
+                            <canvas id="products_bars" ></canvas>
+                        </div>
+                        <div class="mb-3 col-6">
+                            <div class="col">
+                                <div class="mb-3 row-6">
+                                    <canvas id="v2SeverityScore" ></canvas>
+                                </div>
+                                <div class="mb-3 row-6">
+                                    <canvas id="v3SeverityScore" ></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div label="cves" mode="form">
+                    <form id="cveForm">
+                        <div class="form-group">
+                            <h4>CVEs data </h4>
+                            <div id="cveFormData">
+                                <div class="row">
+                                    <div class="input-group mb-3 col">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">CVE</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="cve_CVE" name="cve_CVE" aria-describedby="basic-addon3" data-validation="length" data-validation-length="3-12" data-validation-error-msg="User name has to be an alphanumeric value (3-12 chars)">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-group mb-3 col">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">CVSS Score</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="cve_cvss-score" name="cve_cvss-score" aria-describedby="basic-addon3" data-validation="length" data-validation-length="3-12" data-validation-error-msg="User name has to be an alphanumeric value (3-12 chars)">
+                                    </div>
+                                    <div class="input-group mb-3 col">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">CVSS String</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="cve_cvss-string" name="cve_cvss-string" aria-describedby="basic-addon3" data-validation="length" data-validation-length="3-12" data-validation-error-msg="User name has to be an alphanumeric value (3-12 chars)">
+                                    </div>
+                                </div>
+                            </div>
+                            <h4>Information</h4>
+                            <div id="cveFormInfo">
+                                <div class="row">
+                                    <div class="input-group mb-3 col">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Credits</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="cve_creditSource" name="cve_creditSource" aria-describedby="basic-addon3" data-validation="length" data-validation-length="3-12" data-validation-error-msg="User name has to be an alphanumeric value (3-12 chars)">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-group mb-3 col">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Summary</span>
+                                        </div>
+                                        <textarea class="form-control" id="cve_summary" name="cve_summary" toValidate="aragaost"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-group mb-3 col">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Description</span>
+                                        </div>
+                                        <textarea class="form-control" id="cve_description" name="cve_description" ></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="boxRef">
+                                <h4 >References <img id='arrow_reference' src="../img/arrow-dw2.png" height="15px"/> </h4>
+                                <div id="referenceContainer" style="display: none">
+                                    <div class="row"  obj_to_clone="reference">
+                                        <div class="input-group mb-3 " >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" referencePos></span>
+                                            </div>
+                                            <input type="text" class="form-control" referenceRef name="cve_reference" aria-describedby="basic-addon3">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="boxConfig">
+                                <h4>Vulnerable configurations<img id='arrow_vuln' src="../img/arrow-dw2.png" height="15px"/> </h4>
+                                <div id="configContainer" style="display: none">
+                                    <div class="row"  obj_to_clone="config">
+                                        <div class="input-group mb-3 " >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" configPos></span>
+                                            </div>
+                                            <input type="text" class="form-control" configRef name="cve_config" aria-describedby="basic-addon3">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <input type="button" value="Submit" id="cveFormSubmit" class="btn btn-success"/>
+                            <input type="button" value="Back"   id="cveFormCancel" class="btn btn-default" displayer displayLabel="cves" displayMode="list"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="user-dashboard" landing="dashCrawler">
+            <h1>CRAWLER</h1>
+            <div>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item" >
+                        <a class="nav-link active" href="javascript:void(0);" cw_target='tabDataCrawler'>Data Crawler</a>
+                    </li>
+                    <li class="nav-item" >
+                        <a class="nav-link" href="javascript:void(0);" cw_target='tabSettings'>Settings</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="user-dashboard" cw_landing="tabDataCrawler">
+                    <h1>Data harvested from Crawler</h1>
+                    <div>
+                        <ol class="breadcrumb breadcrumb-arrow" id="breadcrumbDataCrawler">
+                            <li><a href="javascript:void(0)" displayer displayLabel="users" displayMode="list">Data crawler</a></li>
+                        </ol>
+                    </div>
+                    <div id="headerCrawler" style=" margin-top: 10px; text-align: right">
+                        <button jmGraphRefresh="crawler" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span>Refresh</button>
+                        <div class="col-md-8">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="data_crawler_list">Crawlers</label>
+                                </div>
+                                <select class="custom-select" id="data_crawler_list">
+                                    <option jmOption="crawlers">Select a crawler</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div id='preloader_crawler'class=preloader_parent style="display:none"><div class=loader></div></div>
+                        <div class="graph-fluid" id="crawlerGL"></div>
+                    </div>
+                </div>
+            <div class="user-dashboard" cw_landing="tabSettings" style="display:none">
+                <h1>Crawler settings</h1>
+                <div label="crawlers" mode="list">
+                    <div id="headerCrawlers" style=" margin-top: 10px; text-align: right">
+                        <button id="addCrawlers" class="btn btn-primary" ><span class="glyphicon glyphicon-plus"></span> Add new Crawler</button>
+                        <button jmRefresh="tabCrawlers" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button></br>
+                    </div>
+                    <table id="crawlersTable" class="tabella cell-border compact stripe tabella" style="width:100%">
+                        <thead class="tabHeader">
+                        <tr>
+                            <th>ID</th>
+                            <th>Port</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody jmTable="boxRows">
+                        </tbody>
+                    </table>
+                </div>
+                <div label="crawlers" mode="settings">
+                    <div >
+                        <ol class="breadcrumb breadcrumb-arrow" id="breadcrumbSettings">
+                            <li><a href="javascript:void(0)" displayer displayLabel="crawlers" displayMode="list">Crawler list</a></li>
+                        </ol>
+                    </div>
+                    <div class="loaderPar222ent">
+                        <!--<div id="preloader_crawler_settings" class="preloader">
+                            <div id="loader_crawler" class="loader"></div>
+                        </div>
+                        -->
+                        <div class="form-group" crawlerTypeFunctionality="focused indepth_clear indepth_dark">
+                            <h2>Crawler status</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>The crawler <b id="crawlerId_switch"></b> is: <b id="crawler_status"></b></label>
+                                </div>
+                                <div class="col-md-6">
+                                    <button id="changeStatus" class="btn btn-success" ><span class="glyphicon glyphicon-off"></span> Start crawler </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" crawlerTypeFunctionality="indepth_clear indepth_dark">
+                            <h2>Link Filters</h2>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="linkFilter_desc_1">File uploaded</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="linkFilter_filename" aria-describedby="linkFilter_desc_1" >
+                                    </div>
+                                </div>
+                            </div>
+                            </br>
+                            <form id="formLinkFilters">
+                                <div class="row" id="row_updateLinkFilters" style="display:none;">
+                                    <div class="col-md-4">
+                                        <input type="file" name="linkFilter_file">
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-4">
+                                        <button id="updateLinkFilters"  style="text-align: right;" class="btn btn-success" type="button" >Update link filters file</button>
+                                    </div>
+                                    <div hidden>
+                                        <input name="linkFilter_crawler_id" >
+                                    </div>
+                                    </br>
+                                </div>
+                            </form>
+                            <div>
+                                <button id="changeLinkFilters" class="btn btn-warning" ><span class="glyphicon glyphicon-pencil"></span> Change link filters file</button>
+                            </div>
+                        </div>
+                        <div class="form-group" crawlerTypeFunctionality="focused">
+                            <h2>Seed Finder query</h2>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Query</span>
+                                        </div>
+                                        <textarea id="seedFinder_query" class="form-control" aria-label="Query" disabled></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            </br>
+                            <div>
+                                <button id="changeSeedFinder" class="btn btn-warning" ><span class="glyphicon glyphicon-pencil"></span> Change SeedFinder Query</button>
+                                <button id="updateSeedFinder" class="btn btn-success" style="display:none;"><span class="glyphicon glyphicon-ok"></span> Update SeedFinder Query</button>
+                            </div>
+                        </div>
+                        <div class="form-group" crawlerTypeFunctionality="focused indepth_clear indepth_dark">
+                            <h2>Seeds</h2>
+                            <div id="headerSeeds" style=" margin-top: 10px; text-align: right">
+                                <button id="addSeeds" class="btn btn-primary" ><span class="glyphicon glyphicon-plus"></span> Add new Seed</button>
+                                <button id="openSeedFile" class="btn btn-primary" ><span class="glyphicon glyphicon-plus"></span> Load seed file</button>
+                                <button jmRefresh="tabSeeds" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button></br>
+                            </div>
+                            <table id="seedsTable" class="tabella cell-border compact stripe tabella" style="width:100%">
+                                    <thead class="tabHeader">
+                                    <tr>
+                                        <th>Seed</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody jmTable="boxRows">
+                                    </tbody>
+                                </table>
+                        </div>
+                        <div class="form-group" crawlerTypeFunctionality="focused">
+                            <h2>Training URLs</h2>
+                            <div id="headerUrl" style=" margin-top: 10px; text-align: right">
+                                <button id="addUrls" class="btn btn-primary" ><span class="glyphicon glyphicon-plus"></span> Add new URL</button>
+                                <button id="openURLFile" class="btn btn-primary" ><span class="glyphicon glyphicon-plus"></span> Load URL file</button>
+                                <button jmRefresh="tabUrls" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button></br>
+                            </div>
+                            <table id="urlsTable" class="tabella cell-border compact stripe tabella" style="width:100%">
+                                <thead class="tabHeader">
+                                <tr>
+                                    <th>Url</th>
+                                    <th>Type</th>
+                                </tr>
+                                </thead>
+                                <tbody jmTable="boxRows">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="form-group" crawlerTypeFunctionality="indepth_clear indepth_dark">
+                            <h2>Session cookies</h2>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="sessionCookie_desc_1">Domain</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="sessionCookie_domain" aria-describedby="sessionCookie_desc_1" >
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="sessionCookie_desc_2">Cookie</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="sessionCookie_cookie" aria-describedby="sessionCookie_desc_2" >
+                                    </div>
+                                </div>
+                            </div>
+                            </br>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">User Agent</span>
+                                        </div>
+                                        <textarea id="sessionCookie_user_agent" class="form-control" aria-label="Query" disabled></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            </br>
+                            <div>
+                                <button id="changeSessionCookie" class="btn btn-warning" ><span class="glyphicon glyphicon-pencil"></span> Change Session Cookie</button>
+                                <button id="updateSessionCookie" class="btn btn-success" style="display:none;"><span class="glyphicon glyphicon-ok"></span> Update Session Cookie</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--</div> -->
+</div>
+</div>
+<!-- /MAIN DASHBOARD -->
+<!-- MODAL -->
+<!-- Logout -->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Log out</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure to leave the <b>Cyber Trust</b> platform?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-primary" id="execLogout">Logout</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Crawler -->
+<div class="modal fade" id="addCrawlerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Crawler</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="newCrawlerForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">ID</span>
+                                </div>
+                                <input type="text" class="form-control" id="crawler_id" aria-describedby="basic-addon3">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="crawler_port">Port n°</label>
+                                </div>
+                                <select class="custom-select" id="crawler_port">
+                                    <option jmOption="port">Select a port</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="crawler_type">Type</label>
+                                </div>
+                                <select class="custom-select" id="crawler_type">
+                                    <option jmOption="type">Select a type</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-primary" id="addCrawler">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Seed -->
+<div class="modal fade" id="addSeedModal"   tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >New Seed</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Add new seed URL
+                <textarea id="newSeed" rows="4" ></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-primary" id="addSeed">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteSeedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Seed data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Seed</span>
+                    </div>
+                    <textarea id="seedDisplay" class="form-control" aria-label="Query" disabled></textarea>
+                </div>
+                <div hidden>
+                    <input jmSeed="offset"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-danger" id="deleteSeed">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Seed Bulk Upload-->
+<div class="modal fade" id="addSeedBulkModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Load Seed bulk file</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formSeedBulk">
+                    <input type="file" name="seedBulk_file"/>
+                    <div hidden>
+                        <input name="seedBulk_crawler_id" >
+                    </div>
+                    </br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="loadSeedBulk"  style="text-align: right;" class="btn btn-primary" type="button" >Load bulk file</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- URL -->
+<div class="modal fade" id="addURLModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >New Training URLs</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="newType">Options</label>
+                    </div>
+                    <select class="custom-select" id="newType">
+                        <option selected>Select a type</option>
+                        <option value="positive">Positive URLs</option>
+                        <option value="negative">Negative URLs</option>
+                    </select>
+                </div>
+                <div class="row input-group mb-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Training URLs</span>
+                        </div>
+                        <textarea class="form-control" aria-label="With textarea" id="newURL"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-primary" id="addURL">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteURLModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Url data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">Type</span>
+                    </div>
+                    <input type="text" class="form-control" id="delete_url_type" aria-describedby="basic-addon3" >
+                </div>
+                <div class="row input-group mb-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Training URLs</span>
+                        </div>
+                        <textarea class="form-control" aria-label="With textarea" id="delete_url"></textarea>
+                    </div>
+                </div>
+                <div hidden>
+                    <input jmURL="offset"/>
+                    <input jmURL="url_type"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-danger" id="deleteUrl">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- URL Bulk Upload-->
+<div class="modal fade" id="addURLBulkModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Load URL bulk file</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formURLBulk">
+                    <input type="file" name="urlBulk_file"/>
+                    <div hidden>
+                        <input name="urlBulk_crawler_id" >
+                    </div>
+
+                    <div class="row input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="newType">Options</label>
+                        </div>
+                        <select class="custom-select" name="urlBulk_type">
+                            <option selected>Select a type</option>
+                            <option value="positive">Positive URLs</option>
+                            <option value="negative">Negative URLs</option>
+                        </select>
+                    </div>
+                    </br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="loadURLBulk"  style="text-align: right;" class="btn btn-primary" type="button" >Load bulk file</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ConfirmDelete Modal-->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >User deletion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure to delete the user <b id="userDeleteName"></b> from the CyberTrust platform? This action cannot be undo after the confirm
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-danger" id="userDeleteConfirm">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/MODAL/-->
+</body>
+<!-- Jquery -->
+<script type="text/javascript" src="../js2/jquery-3.4.1.min.js"></script>
+<!-- AjaxForm -->
+<script type="text/javascript" src="../js2/jquery.form.min.js"></script>
+<!-- Popper -->
+<script type="text/javascript" src="../js2/popper/popper.min.js"></script>
+<!-- Bootstrap -->
+<script type="text/javascript" src="../js2/bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTable Full -->
+<script type="text/javascript" src="../js2/DataTables/datatables.min.js"></script>
+<!-- Datepicker -->
+<script type="text/javascript" src="../js2/jquery.datetimepicker.full.min.js"></script>
+<!-- GoldenLayout -->
+<script type="text/javascript" src="../js2/goldenLayout/goldenlayout.min.js"></script>
+<!-- ChartJS -->
+<script type="text/javascript" src="../js2/ChartJS/Chart.bundle.min.js"></script>
+<!-- Gauge -->
+<script type="text/javascript" src="../js2/Gauge/gauge.min.js"></script>
+<!-- Moment -->
+<script type="text/javascript" src="../js2/moment.min.js"></script>
+<!-- Toggle -->
+<script type="text/javascript" src="../js2/bootstrap-toggle.min.js"></script>
+<!-- Pagina -->
+<script type="text/javascript" src="../js/chartjs.min.js"></script>
+<script type="text/javascript" src="../js2/Common.js"></script>
+<script type="text/javascript" src="admin_home.js"></script>
+<script type="text/javascript" src="../js2/profilingServices.js"></script>
+<script type="text/javascript" src="crawlers.js"></script>
+<script src="../host.js"></script>
+</html>

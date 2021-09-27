@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="Cyber Trust">
+    <meta name="author" content="Mathema srl">
+    <meta name="keyword" content="Cyber Trust by Mathema">
+    <title>Cyber Trust</title>
+    <!-- CSS -->
+    <!-- Bootstrap -->
+    <link href="../js2/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <!-- Dashboard -->
+    <link href="../css2/dashboard_isp.css" rel="stylesheet" id="dashboard-css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <!-- Datepicker -->
+    <link href="../css2/jquery.datetimepicker.min.css" rel="stylesheet">
+    <!-- Various -->
+    <link href="../css2/cybertrust.css" rel="stylesheet" id="cybertrust-css">
+    <!-- DataTable -->
+    <link rel="stylesheet" type="text/css" href="../js2/DataTables/datatables.min.css"/>
+    <!-- GoldenLayout -->
+    <link type="text/css" rel="stylesheet" href="../js2/goldenLayout/goldenlayout-base.css" />
+    <link type="text/css" rel="stylesheet" href="../js2/goldenLayout/goldenlayout-light-theme.css" />
+
+    <!--<script type="text/javascript" src="Cancello__dati.js"></script>-->
+    <!-- Vis-->
+    <script type="text/javascript" src="../js/vis.min.js"></script>
+    <link href="../css/vis.min.css" rel="stylesheet" type="text/css" />
+    <!-- <script src="../js/chartjs.min.js"></script> -->
+    <!-- -->
+
+</head>
+<body class="fixed-sn light-blue-skin">
+<!-- MAIN DASHBOARD -->
+<div class="container-fluid">
+    <div class="row" style="height: 100%;">
+        <div class="col-md-2 col-sm-1" id="navigation">
+            <div class="logo">
+                <a hef="home.html"><img src="../images/logo_cybertrust.png" alt="cybertrust_logo" class="hidden-xs hidden-sm"></a>
+            </div>
+            <div class="navi">
+                <ul>
+                    <li target='dashOMCP' class="active">       <a href="javascript:void(0)">    <i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Statistics</span></a></li>
+                    <li> <a href="http://172.16.4.3:5601/app/kibana#/home?_g=()"  target="_blank" rel="noopener noreferrer"><img src="../images/KibanLogo.png" height="40px;"/> Kibana Advance View</a></li>
+                    <li target='dashProfiling' class="active">  <a href="javascript:void(0)">    <i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Profiling Service</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10 col-sm-11 contentbox">
+            <div class="ispPalette container-width-fluid" >
+                <a class="navbar-brand ispPalette" href="javascript:void(0);">ISP</a>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light ispPalette ml-auto" >
+                    <li class="nav-item d-md-down-none" style="text-align: right;" >
+                        <div class='logout' id="logoutUser"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</div>
+                    </li>
+                </nav>
+            </div>
+            <div class="user-dashboard" landing="dashOMCP">
+                <div id='preloader_dashOMCP' class=preloader><div class=loader></div></div>
+                <h1>OMCP</h1>
+                <div>
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item" >
+                            <a class="nav-link active" href="javascript:void(0);" om_target='tabVuln'>Vulnerabilities</a>
+                        </li>
+                        <!--<li class="nav-item" >
+                            <a class="nav-link" href="javascript:void(0);" om_target='tabEvents'>Events [flow]</a>
+                        </li> -->
+                        <li class="nav-item" >
+                            <a class="nav-link" href="javascript:void(0);" om_target='tabGeoMap'>Alerts by GeoMap</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a class="nav-link" href="javascript:void(0);" om_target='tabAlerts'>Alerts Events</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a class="nav-link" href="javascript:void(0);" om_target='tabAllEvents'>All Events</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a class="nav-link" href="javascript:void(0);" om_target='tabDNS'>DNS Events</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a class="nav-link" href="javascript:void(0);" om_target='tabHTTP'>HTTP Events</a>
+                        </li>
+                    </ul>
+                </div>
+                <div >
+                    <div class="user-dashboard" om_landing="tabVuln" dashboard>
+                        <!-- Ich weiß es nicht -->
+                        <div id="headerVuln" style=" margin-top: 10px; _text-align: right">
+                            <div class="form-group">
+                                <div class="dropdown">
+                                    <button id="vuln_yearDD" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <div id="yearContainer" class="dropdown-menu" aria-labelledby="dropdownMenuButton"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item" >
+                                    <a class="nav-link active" href="javascript:void(0);" misp_target='tabMispVuln'>Vulnerabilities</a>
+                                </li>
+                                <li class="nav-item" >
+                                    <a class="nav-link" href="javascript:void(0);" misp_target='tabMispCVE'>CVE's List</a>
+                                </li>
+                                <li class="nav-item" >
+                                    <a class="nav-link" href="javascript:void(0);" misp_target='tabMispCVSS'>CVSS Score</a>
+                                </li>
+                                <li class="nav-item" >
+                                    <a class="nav-link" href="javascript:void(0);" misp_target='tabMispExploits'>Exploits</a>
+                                </li>
+                                <li class="nav-item" >
+                                    <a class="nav-link" href="javascript:void(0);" misp_target='tabMispProducts'>Products</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="user-dashboard" misp_landing="tabMispVuln" dashboard>
+                            <!-- Ich weiß es nicht -->
+                            <div class="graph-fluid" id="omcpGL" ></div>
+                            <div id="vulnDashboard">
+                                <div class="row" id="latestCVES">
+                                    <div class="col-lg-12">
+                                        <h3>CVEs Received and Processed</h3>
+                                        <div>
+                                            <div id='preloader_table_RecProc' class=preloader><div class=loader></div></div>
+                                            <table class="table table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>Time Period</th>
+                                                <th>New CVEs Received</th>
+                                                <th>CVEs Published</th>
+                                                <th>CVEs Modified</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <th nowrap="nowrap">Today</th>
+                                                <td jmData="find_day">0</td>
+                                                <td jmData="published_day">0</td>
+                                                <td jmData="modified_day">0</td>
+                                            </tr>
+                                            <tr>
+                                                <th nowrap="nowrap">This Week</th>
+                                                <td jmData="find_week">0</td>
+                                                <td jmData="published_week">0</td>
+                                                <td jmData="modified_week">0</td>
+                                            </tr>
+                                            <tr>
+                                                <th nowrap="nowrap">This Month</th>
+                                                <td jmData="find_month">0</td>
+                                                <td jmData="published_month">0</td>
+                                                <td jmData="modified_month">0</td>
+                                            </tr>
+                                            <tr>
+                                                <th nowrap="nowrap">Last Month</th>
+                                                <td jmData="find_previous_month">0</td>
+                                                <td jmData="published_previous_month">0</td>
+                                                <td jmData="modified_previous_month">0</td>
+                                            </tr>
+                                            <tr>
+                                                <th nowrap="nowrap">This Year</th>
+                                                <td jmData="find_year">0</td>
+                                                <td jmData="published_year">0</td>
+                                                <td jmData="modified_year">0</td>
+                                            </tr>
+                                            <tr>
+                                                <th nowrap="nowrap">Previous Year</th>
+                                                <td jmData="find_previous_year">0</td>
+                                                <td jmData="published_previous_year">0</td>
+                                                <td jmData="modified_previous_year">0</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <h3>CVE Status Count</h3>
+                                        <div>
+                                            <div id='preloader_table_StatusCount' class=preloader><div class=loader></div></div>
+                                            <table class="table table-striped">
+                                                <tbody>
+                                                <tr ng-repeat="data in vm.countsData | orderBy: 'order'" uib-tooltip="{{data.description}}">
+                                                    <td>Total</td><td jmData="count_tot">No data</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Published</td><td jmData="count_published">No data</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Modified</td><td jmData="count_modified">No data</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Score assigned</td><td jmData="count_score">No data</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Total attribute assigned</td><td jmData="count_attrs">No data</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <h3>eVDB Contains</h3>
+                                        <div>
+                                            <!-- <div id='preloader_table_NVDContains' class=preloader><div class=loader></div></div> -->
+                                            <table class="table table-striped">
+                                                <tbody>
+                                                <tr>
+                                                    <td>CVE Vulnerabilities</td>
+                                                    <td jmData="evdb_vulnerability">0</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Weakness</td>
+                                                    <td jmData="evdb_weakness">0</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Exploits</td>
+                                                    <td jmData="evdb_exploits">0</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>US-CERT Alerts</td>
+                                                    <td>0</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>US-CERT Vuln Notes</td>
+                                                    <td>0</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>OVAL Queries</td>
+                                                    <td>0</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>CPE Names</td>
+                                                    <td jmData="evdb_cpe">0</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="user-dashboard" misp_landing="tabMispCVE" dashboard>
+                            <!-- Ich weiß es nicht -->
+                            <h1>MISP</h1>
+                            <div class="user-dashboard">
+                                <div>
+                                    <ol class="breadcrumb breadcrumb-arrow" id="breadcrumbCVE">
+                                        <li><a href="javascript:void(0)" displayer displayLabel="cves" displayMode="list">CVes list</a></li>
+                                    </ol>
+                                </div>
+                                <div label="cves" mode="list">
+                                    <div id="headerCVE" style=" margin-top: 10px; text-align: right">
+                                        <button jmRefresh="cve" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                                    </div>
+                                    <div class="row">
+                                        <table id="cveTable" class="tabella display cell-border compact stripe" style="width:100%">
+                                            <thead class="tabHeader">
+                                            <tr>
+                                                <th>CVE</th>
+                                                <th>Score</th>
+                                                <th>Source</th>
+                                                <th>Published</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody jmTable="boxRows">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div label="cves" mode="form">
+                                    <form id="cveForm">
+                                        <div class="form-group">
+                                            <h4>CVEs data </h4>
+                                            <div id="cveFormData">
+                                                <div class="row">
+                                                    <div class="input-group mb-3 col">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">CVE</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="cve_CVE" name="cve_CVE" aria-describedby="basic-addon3" data-validation="length" data-validation-length="3-12" data-validation-error-msg="User name has to be an alphanumeric value (3-12 chars)">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-group mb-3 col">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">CVSS Score</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="cve_cvss-score" name="cve_cvss-score" aria-describedby="basic-addon3" data-validation="length" data-validation-length="3-12" data-validation-error-msg="User name has to be an alphanumeric value (3-12 chars)">
+                                                    </div>
+                                                    <div class="input-group mb-3 col">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">CVSS String</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="cve_cvss-string" name="cve_cvss-string" aria-describedby="basic-addon3" data-validation="length" data-validation-length="3-12" data-validation-error-msg="User name has to be an alphanumeric value (3-12 chars)">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h4>Information</h4>
+                                            <div id="cveFormInfo">
+                                                <div class="row">
+                                                    <div class="input-group mb-3 col">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Credits</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="cve_creditSource" name="cve_creditSource" aria-describedby="basic-addon3" data-validation="length" data-validation-length="3-12" data-validation-error-msg="User name has to be an alphanumeric value (3-12 chars)">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-group mb-3 col">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Summary</span>
+                                                        </div>
+                                                        <textarea class="form-control" id="cve_summary" name="cve_summary" toValidate="aragaost"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-group mb-3 col">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Description</span>
+                                                        </div>
+                                                        <textarea class="form-control" id="cve_description" name="cve_description" ></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="boxRef">
+                                                <h4 >References <img id='arrow_reference' src="../img/arrow-dw2.png" height="15px"/> </h4>
+                                                <div id="referenceContainer" style="display: none">
+                                                    <div class="row"  obj_to_clone="reference">
+                                                        <div class="input-group mb-3 " >
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" referencePos></span>
+                                                            </div>
+                                                            <input type="text" class="form-control" referenceRef name="cve_reference" aria-describedby="basic-addon3">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="boxConfig">
+                                                <h4>Vulnerable configurations<img id='arrow_vuln' src="../img/arrow-dw2.png" height="15px"/> </h4>
+                                                <div id="configContainer" style="display: none">
+                                                    <div class="row"  obj_to_clone="config">
+                                                        <div class="input-group mb-3 " >
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" configPos></span>
+                                                            </div>
+                                                            <input type="text" class="form-control" configRef name="cve_config" aria-describedby="basic-addon3">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-actions">
+                                            <input type="button" value="Submit" id="cveFormSubmit" class="btn btn-success"/>
+                                            <input type="button" value="Back"   id="cveFormCancel" class="btn btn-default" displayer displayLabel="cves" displayMode="list"/>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="user-dashboard" misp_landing="tabMispCVSS" dashboard>
+                            <!-- Ich weiß es nicht -->
+                            <div class="graph-fluid" id="cvssGL" ></div>
+                            <div id="cvssDashboard">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <canvas id="v2SeverityScore" ></canvas>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <canvas id="v3SeverityScore" ></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="user-dashboard" misp_landing="tabMispExploits" dashboard>
+                            <div class="graph-fluid" id="exploitsGL" ></div>
+                        </div>
+                        <div class="user-dashboard" misp_landing="tabMispProducts" dashboard>
+                            <div id="productsAll"   >
+                                <div class="graph-fluid" id="productsGL" ></div>
+                                <div id="products_table" >
+                                    <table id="vendorTable" class="tabella display cell-border compact stripe" style="width:100%">
+                                        <thead class="tabHeader">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Vendor</th>
+                                            <th>N° of products</th>
+                                            <th>Parts</th>
+                                            <th>N°CPE</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody jmTable="boxRows">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="productsSingle" style="display:none;">
+                                <div>
+                                    <ol class="breadcrumb breadcrumb-arrow" id="breadcrumbProduct">
+                                        <li><a href="javascript:void(0)" id="productList" >Products</a></li>
+                                    </ol>
+                                </div>
+                                <div class="graph-fluid" id="singleProductsGL" ></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-dashboard" om_landing="tabEvents" dashboard>
+                        <!-- Ich weiß es nicht -->
+                        <div id="headerEvents" style=" margin-top: 10px; _text-align: right">
+                            <!--<button jmRefreshData="events" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>-->
+                        </div>
+                        <div class="graph-fluid" id="eventsGL"></div>
+                        <!--<div>
+                            <div class="row">
+                                <canvas id="dns_timeline"></canvas>
+                            </div>
+                            <div class="row">
+                                <table id="dnsTable" class="tabella display cell-border compact stripe" style="width:100%">
+                                    <thead class="tabHeader">
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>client_hostname</th>
+                                        <th>server_hostname</th>
+                                        <th>DNS.type</th>
+                                        <th>DNS.rrname</th>
+                                        <th>DNS.rcode</th>
+                                        <th>DNS.rtype</th>
+                                        <th>DNS.rdata</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody jmTable="boxRows">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>-->
+                    </div>
+                    <div class="user-dashboard" om_landing="tabGeoMap" dashboard>
+                        <!-- Ich weiß es nicht -->
+                        <div id="headerGeoMap" style=" margin-top: 10px; _text-align: right">
+                            <!--<button jmRefreshData="GeoMap" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>-->
+                        </div>
+                        <div class="graph-fluid" id="geoMapGL"></div>
+                    </div>
+                    <div class="user-dashboard" om_landing="tabAlerts" dashboard>
+                        <!-- Ich weiß es nicht -->
+                        <div id="headerAlerts" style=" margin-top: 10px; _text-align: right">
+                            <!--<button jmRefreshData="Alerts" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>-->
+                        </div>
+                        <div class="graph-fluid" id="alertsGL"></div>
+                    </div>
+                    <div class="user-dashboard" om_landing="tabAllEvents" dashboard>
+                        <!-- Ich weiß es nicht -->
+                        <div id="headerAllEvents" style=" margin-top: 10px; _text-align: right">
+                            <!--<button jmRefreshData="AllEvents" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>-->
+                        </div>
+                        <div class="graph-fluid" id="allEventsGL"></div>
+                    </div>
+                    <div class="user-dashboard" om_landing="tabDNS" dashboard>
+                        <!-- Ich weiß es nicht -->
+                        <div id="headerDNS" style=" margin-top: 10px; _text-align: right">
+                            <!--<button jmRefreshData="DNS" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>-->
+                        </div>
+                        <div class="graph-fluid" id="dnsGL"></div>
+                    </div>
+                    <div class="user-dashboard" om_landing="tabHTTP" dashboard>
+                        <!-- Ich weiß es nicht -->
+                        <div id="headerHTTP" style=" margin-top: 10px; _text-align: right">
+                            <!--<button jmRefreshData="tabHTTP" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>-->
+                        </div>
+                        <div class="graph-fluid" id="httpGL"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="user-dashboard" landing="dashProfiling">
+                <h1>PROFILING SERVICE</h1>
+                <div>
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item" >
+                            <a class="nav-link active" href="javascript:void(0);" ps_target='tabUsers'>Users</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a class="nav-link" href="javascript:void(0);" ps_target='tabSH'>Smart Homes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0);" ps_target='tabDevices'>Devices</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0);" ps_target='tabAlerts'>Alerts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0);" ps_target='tabMitigations'>Mitigations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0);" ps_target='tabNetwork'>Network</a>
+                        </li>
+                    </ul>
+                </div>
+                <div >
+                    <div class="user-dashboard" ps_landing="tabUsers" dashboard>
+                        <!-- Ich weiß es nicht -->
+                        <h1>Users</h1>
+                        <div>
+                            <ol class="breadcrumb breadcrumb-arrow" id="breadcrumbUsers">
+                                <li><a href="javascript:void(0)" displayer displayLabel="users" displayMode="list">Account list</a></li>
+                            </ol>
+                        </div>
+                        <div label="users" mode="list">
+                            <div id="headerUtenti" style=" margin-top: 10px; text-align: right">
+                                <!-- <button type="button" class="btn btn-primary" id="addUser" displayer displayLabel="users" displayMode="form">Add new user</button> -->
+                                <button jmRefresh="users" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                            </div>
+                            <div class="row">
+                                <table id="usersTable" class="tabella display cell-border compact stripe" style="width:100%">
+                                    <thead class="tabHeader">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Surname</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Telephone</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody jmTable="boxRows">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div label="users" mode="form">
+                            <form id="addUserForm">
+                                <div class="form-group">
+                                    <div id="userFormPersonalData">
+                                        <h4>Personal Data</h4>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Name</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="user_firstname" name="user_firstname"  placeholder="Firstname" toValidate="required">
+                                            </div>
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" >Surname</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="user_lastname" name="user_lastname" placeholder="Lastname" toValidate="required">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" >Date of birth</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="user_dateofbirth" name="user_dateofbirth" placeholder="DD-MM-YYYY" readonly toValidate="required">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="userFormContacts">
+                                        <h4>Contacts</h4>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Email</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="user_email" name="user_email" placeholder="example@mail.com" toValidate="required email"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" >Telephone</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="user_telephone" name="user_telephone" placeholder="+## XXX YYY YYY YYYYY"  toValidate="required">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="userFormCredentials">
+                                        <h4>Credentials</h4>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="user_roles_button">User Role</button>
+                                                    <div class="dropdown-menu" id="userRoleMenu">
+                                                        <a class="dropdown-item" href="javascript:void(0)" roleOption="Administrator">Administrator</a>
+                                                        <a class="dropdown-item" href="javascript:void(0)" roleOption="LEA">LEA</a>
+                                                        <a class="dropdown-item" href="javascript:void(0)" roleOption="ISP">ISP</a>
+                                                    </div>
+                                                </div>
+                                                <input type="text" class="form-control" aria-label="" id="user_roles" name="user_roles" placeholder="Select an option" readonly  toValidate="required">
+                                            </div>
+                                        </div>
+                                        <div class="row" formRead='false'>
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Username</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="user_username" name="user_username" aria-describedby="basic-addon3" placeholder="Username" toValidate="required" unique="username">
+                                            </div>
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" >Password</span>
+                                                </div>
+                                                <input type="password" class="form-control" id="user_password" name="user_password" placeholder="Password"  toValidate="required password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <input type="button" value="Submit" id="userFormSubmit" class="btn btn-success" formRead='false'/>
+                                    <input type="button" value="Back"   id="userFormCancel" class="btn btn-default" displayer displayLabel="users" displayMode="list"/>
+                                    <input type="button" value="Delete" id="userFormDelete" class="btn btn-danger" formRead='true' />
+                                </div>
+                                <div hidden>
+                                    <input name="token"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="user-dashboard" style="display:none" ps_landing="tabSH" dashboard>
+                        <h1>Smart-Homes</h1>
+                        <div>
+                            <ol class="breadcrumb breadcrumb-arrow" id="breadcrumbSH">
+                                <li><a href="javascript:void(0)" displayer displayLabel="SH" displayMode="list">Smart-homes list</a></li>
+                            </ol>
+                        </div>
+                        <div label="SH" mode="list">
+                            <div id="headerSH" style=" margin-top: 10px; text-align: right">
+                                <!-- <button type="button" class="btn btn-primary" id="addDevices" displayer displayLabel="devices" displayMode="form" adder="device">Add new device</button> -->
+                                <button jmRefresh="smarthomes" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                            </div>
+                            <div class="row">
+                                <table id="smarthomesTable" class="tabella cell-border compact stripe tabella" style="width:100%">
+                                    <thead class="tabHeader">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Network</th>
+                                        <th>Gateway</th>
+                                        <th>Owner</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody jmTable="boxRows">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div label="SH" mode="form">
+                            <div>
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item" >
+                                        <a class="nav-link active" href="javascript:void(0);" sh_target='tabData'>Smart-home data</a>
+                                    </li>
+                                    <li class="nav-item" >
+                                        <a class="nav-link" href="javascript:void(0);" sh_target='tabDevice'>Device</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div >
+                                <div class="user-dashboard" sh_landing="tabData">
+                                    <form id="sohoForm">
+                                        <div class="form-group">
+                                            <div id="sohoFormGeneric">
+                                                <h4>Smart-Home data</h4>
+                                                <div class="row">
+                                                    <div class="input-group mb-3 col-4">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">SOHO</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" soho="name" id="soho_name" name="soho_name" toValidate="required">
+                                                    </div>
+                                                    <div class="input-group mb-3 col-8">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Description</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" soho="description" id="soho_description" name="soho_description" toValidate="required">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-group mb-3 col-4">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Owner</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" soho="ownerData" id="soho_owner" name="soho_owner" toValidate="required">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-group mb-3 col-6">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Network IP</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" soho="network" id="soho_network" name="soho_network" toValidate="required">
+                                                    </div>
+                                                    <div class="input-group mb-3 col-6">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Gateway IP</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" soho="gateway" id="soho_gateway" name="soho_gateway" toValidate="required">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-group mb-3 col-6">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">LAN</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" soho="LAN" id="soho_LAN" name="soho_LAN" toValidate="required">
+                                                    </div>
+                                                    <div class="input-group mb-3 col-6">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">WAN</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" soho="WAN" id="soho_WAN" name="soho_WAN" toValidate="required">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="sohoFormHealth">
+                                            <h4>Health status</h4>
+                                            <div class="row">
+                                                <div class="input-group mb-3 col-8">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Health status</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" soho_health="description" id="soho_health_description" name="soho_description" toValidate="required">
+                                                </div>
+                                                <div class="input-group mb-3 col-4">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Status</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" soho_health="status" id="soho_health_status" name="soho_status" toValidate="required">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="sohoFormIrg">
+                                            <h4>Attack Mitigation</h4>
+                                            <div class="row">
+                                                <div class="input-group mb-3 col-4">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Hostname</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" soho_irg="host_name" id="soho_host_name" name="soho_host_name" toValidate="required">
+                                                </div>
+                                                <div class="input-group mb-3 col-8">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Host Uuid</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" soho_irg="host_id" id="soho_host_id" name="soho_host_id" toValidate="required">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-group mb-3 col-6">
+                                                    <label>Patch cost</label>
+                                                    <canvas id="gaugePatch" ></canvas>
+                                                </div>
+                                                <div class="input-group mb-3 col-6">
+                                                    <label>Firewall cost</label>
+                                                    <canvas id="gaugeFirewall" ></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="sohoFormIre">
+                                            <h4>Intelligent Security</h4>
+                                            <div class="row">
+                                                <div class="input-group mb-3 col-4">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Automode</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" soho_ire="automode" id="soho_ire_automode" name="soho_ire_automode" toValidate="required">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-group col-6">
+                                                    <label>Availability</label>
+                                                    <canvas id="gaugeSa" ></canvas>
+                                                </div>
+                                                <div class="input-group col-6">
+                                                    <label>Performance</label>
+                                                    <canvas id="gaugeSp" ></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div hidden>
+                                            <input name="device_userId"/>
+                                            <input name="token"/>
+                                        </div>
+                                        <div class="form-actions">
+                                            <input type="button" value="Submit" id="SHFormSubmit" class="btn btn-success"   formRead='false'/>
+                                            <input type="button" value="Back"   id="SHFormCancel" class=" btn btn-default"  displayer displayLabel="SH" displayMode="list"/>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="user-dashboard" sh_landing="tabDevice">
+                                    <div id="headerSHDevice" style=" margin-top: 10px; text-align: right">
+                                        <button jmRefresh="shDevices" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                                    </div>
+                                    <div class="row">
+                                        <table id="shDevicesTable" class="tabella cell-border compact stripe tabella" style="width:100%">
+                                            <thead class="tabHeader">
+                                            <tr>
+                                                <th>Manufacturer</th>
+                                                <th>Model</th>
+                                                <th>Description</th>
+                                                <th>Type</th>
+                                                <th>Trust Level</th>
+                                                <th>Risk Level</th>
+                                                <th>Criticality</th>
+                                                <th>OS</th>
+                                                <th>Date</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody jmTable="boxRows">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-dashboard" style="display:none" ps_landing="tabDevices" dashboard>
+                        <h1>Devices</h1>
+                        <div>
+                            <ol class="breadcrumb breadcrumb-arrow" id="breadcrumbDevices">
+                                <li><a href="javascript:void(0)" displayer displayLabel="devices" displayMode="list">Devices list</a></li>
+                            </ol>
+                        </div>
+                        <div label="devices" mode="list">
+                            <div id="headerDevice" style=" margin-top: 10px; text-align: right">
+                                <!-- <button type="button" class="btn btn-primary" id="addDevices" displayer displayLabel="devices" displayMode="form" adder="device">Add new device</button> -->
+                                <button jmRefresh="devices" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                            </div>
+                            <div class="row">
+                                <table id="devicesTable" class="tabella cell-border compact stripe tabella" style="width:100%">
+                                    <thead class="tabHeader">
+                                    <tr>
+                                        <th>Manufacturer</th>
+                                        <th>Model</th>
+                                        <th>Owner</th>
+                                        <th>Description</th>
+                                        <th>Type</th>
+                                        <th>Trust Level</th>
+                                        <th>Risk Level</th>
+                                        <th>Criticality</th>
+                                        <th>OS</th>
+                                        <!-- <th>Patching status</th> -->
+                                    </tr>
+                                    </thead>
+                                    <tbody jmTable="boxRows">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div label="devices" mode="form">
+                            <div>
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item" >
+                                        <a class="nav-link active" href="javascript:void(0);" device_target='tabData'>Device data</a>
+                                    </li>
+                                    <li class="nav-item" >
+                                        <a class="nav-link" href="javascript:void(0);" device_target='tabVuln'>Vulnerability</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div >
+                                <div class="user-dashboard" device_landing="tabData">
+                                    <form id="addDeviceForm">
+                                <div class="form-group">
+                                    <div id="deviceFormGeneric">
+                                        <h4>Device data</h4>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Description</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_description" name="device_description" toValidate="required">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">CPE</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_cpe" name="device_cpe" toValidate="required">
+                                            </div>
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Type</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_type" name="device_type" toValidate="required">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group col-md-9 ">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Owner</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_owner_label" readonly toValidate="required">
+                                            </div>
+                                            <div hidden>
+                                                <input id="device_owner_id" name="device_owner_id">
+                                                <input id="device_owner_type" name="device_owner_type">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="deviceFormHW">
+                                        <h4>Hardware information</h4>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Manufacture</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_device_info_manufacturer" name="device_device_info_manufacturer" toValidate="required">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Model</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_device_info_model" name="device_device_info_model" toValidate="required">
+                                            </div>
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Identifier</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_device_info_hardware_id" name="device_device_info_hardware_id" toValidate="required">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col-5">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">IP Address</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_ip" name="device_ip" toValidate="required">
+                                            </div>
+                                            <div class="input-group mb-3 col-5">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Mac Address</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_mac" name="device_mac" toValidate="required">
+                                            </div>
+                                            <div class="input-group mb-3 col-2">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Monitoring</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_monitoring" name="device_monitoring" toValidate="required">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="deviceFormOS">
+                                        <h4>OS configuration</h4>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Operative System</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_device_info_os_name" name="device_device_info_os_name" toValidate="required">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Version</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_device_info_os_version" name="device_device_info_os_version" toValidate="required">
+                                            </div>
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">SDK</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_device_info_os_sdk" name="device_device_info_os_sdk" toValidate="required">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="deviceSecurity">
+                                        <h4>Security status</h4>
+                                        <div class="row">
+                                            <!--<div class="input-group mb-3 col-4">
+                                                <label>Patch</label>
+                                                <canvas id="gaugePatchLvl" ></canvas>
+                                            </div> -->
+                                            <div class="input-group mb-3 col-6">
+                                                <label>Trust level</label>
+                                                <canvas id="gaugeTrust" ></canvas>
+                                            </div>
+                                            <div class="input-group mb-3 col-6">
+                                                <label>Risk level</label>
+                                                <canvas id="gaugeRisk" ></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div hidden>
+                                    <input name="device_userId"/>
+                                    <input name="token"/>
+                                </div>
+                                <div class="form-actions">
+                                    <input type="button" value="Submit" id="deviceFormSubmit" class="btn btn-success" formRead='false'/>
+                                    <input type="button" value="Back"   id="deviceFormCancel" class=" btn btn-default" displayer displayLabel="devices" displayMode="list"/>
+                                    <input type="button" value="Delete" id="deviceFormDelete" class="btn btn-danger" formRead='true' />
+                                </div>
+                            </form>
+                                </div>
+                                <div class="user-dashboard" device_landing="tabVuln">
+                                    <h1>Vulnerabilities</h1>
+                                    <div>
+                                        <ol class="breadcrumb breadcrumb-arrow" id="breadcrumbVulnerabilities">
+                                            <li><a href="javascript:void(0)" displayer displayLabel="vulnerabilities" displayMode="list">Vulnerability list</a></li>
+                                        </ol>
+                                    </div>
+                                    <div label="vulnerabilities" mode="list">
+                                        <div id="headerVulnerabilities" style=" margin-top: 10px; text-align: right">
+                                            <button jmRefresh="vulnerabilities" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                                        </div>
+                                        <div class="row">
+                                            <table id="vulnerabilitiesTable" class="tabella display cell-border compact stripe" style="width:100%">
+                                                <thead class="tabHeader">
+                                                <tr>
+                                                    <th>#Event</th>
+                                                    <th>CVE</th>
+                                                    <th>Threat level</th>
+                                                    <th>Mitigation type</th>
+                                                    <th>Mitigation ref.</th>
+                                                    <th>Date discovery</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody jmTable="boxRows">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div label="vulnerabilities" mode="form">
+                                        <form id="vulnerabilitiesForm">
+                                            <div class="form-group">
+                                                <h4>CVEs data </h4>
+                                                <div id="vulnFormData">
+                                                    <div class="row">
+                                                        <div class="input-group mb-3 col">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">CVE</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" id="vuln_CVE" name="vuln_CVE" aria-describedby="basic-addon3" data-validation="length" data-validation-length="3-12" data-validation-error-msg="User name has to be an alphanumeric value (3-12 chars)">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="input-group mb-3 col">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">CVSS Score</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" id="vuln_cvss-score" name="vuln_cvss-score" aria-describedby="basic-addon3" data-validation="length" data-validation-length="3-12" data-validation-error-msg="User name has to be an alphanumeric value (3-12 chars)">
+                                                        </div>
+                                                        <div class="input-group mb-3 col">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">CVSS String</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" id="vuln_cvss-string" name="vuln_cvss-string" aria-describedby="basic-addon3" data-validation="length" data-validation-length="3-12" data-validation-error-msg="User name has to be an alphanumeric value (3-12 chars)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <h4>Information</h4>
+                                                <div id="vulnFormInfo">
+                                                    <div class="row">
+                                                        <div class="input-group mb-3 col">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Credits</span>
+                                                            </div>
+                                                            <input type="text" class="form-control" id="vuln_creditSource" name="vuln_creditSource" aria-describedby="basic-addon3" data-validation="length" data-validation-length="3-12" data-validation-error-msg="User name has to be an alphanumeric value (3-12 chars)">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="input-group mb-3 col">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Summary</span>
+                                                            </div>
+                                                            <textarea class="form-control" id="vuln_summary" name="vuln_summary" toValidate="aragaost"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="input-group mb-3 col">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Description</span>
+                                                            </div>
+                                                            <textarea class="form-control" id="vuln_description" name="vuln_description" ></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="boxRefVuln">
+                                                    <h4 >References <img id='vulnerabilies_arrow_reference' src="../img/arrow-dw2.png" height="15px"/> </h4>
+                                                    <div id="referenceContainerVuln" style="display: none">
+                                                        <div class="row"  obj_to_clone="reference">
+                                                            <div class="input-group mb-3 " >
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" referencePos></span>
+                                                                </div>
+                                                                <input type="text" class="form-control" referenceRef name="vuln_reference" aria-describedby="basic-addon3">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="boxConfigVuln">
+                                                    <h4>Vulnerable configurations<img id='vulnerabilies_arrow_vuln' src="../img/arrow-dw2.png" height="15px"/> </h4>
+                                                    <div id="configContainerVuln" style="display: none">
+                                                        <div class="row"  obj_to_clone="config">
+                                                            <div class="input-group mb-3 " >
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text" configPos></span>
+                                                                </div>
+                                                                <input type="text" class="form-control" configRef name="vuln_config" aria-describedby="basic-addon3">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-actions">
+                                                <input type="button" value="Back"   id="vulnFormCancel" class="btn btn-default" displayer displayLabel="vulnerabilities" displayMode="list"/>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-dashboard" style="display:none" ps_landing="tabAlerts" dashboard>
+                        <h1>Alerts</h1>
+                        <div>
+                            <ol class="breadcrumb breadcrumb-arrow" id="breadcrumbAlerts">
+                                <li><a href="javascript:void(0)" displayer displayLabel="mitigations" displayMode="list">Alerts list</a></li>
+                            </ol>
+                        </div>
+                        <div label="alerts" mode="list">
+                            <div id="headerAlertsPS" style=" margin-top: 10px; text-align: right">
+                                <button jmRefresh="alerts" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                            </div>
+                            <div class="row">
+                                <table id="alertsTable" class="tabella cell-border compact stripe tabella">
+                                    <thead class="tabHeader">
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Device</th>
+                                        <th>Dev. type</th>
+                                        <th>Criticality</th>
+                                        <th>Importance</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody jmTable="boxRows">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--
+                        <div label="mitigations" mode="form">
+                            <form >
+                                <div class="form-group">
+                                    <div id="mitigationFormGeneric">
+                                        <h4>Mitigation data</h4>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Date</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="mitigation_timestamp" name="mitigation_timestamp" >
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Mitigation status</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="mitigation_status" name="mitigation_status">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="mitigationHostAffected">
+                                        <h4>Host Affected</h4>
+                                        <div class="row">
+                                            <table id="affectedHostTable" class="tabella cell-border compact stripe tabella" style="width:100%">
+                                                <thead class="tabHeader">
+                                                <tr>
+                                                    <th>Hosts</th>
+                                                    <th>IP Address</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody jmTable="boxRows">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div id="mitigationRules">
+                                        <h4>Rules applied</h4>
+                                        <div class="row" id="mitigationRulesContainer">
+                                            <div class="input-group mb-10 col" jmRule="box">
+                                                <p jmRule="rule"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <input type="button" value="Back"   id="mitigationFormCancel" class=" btn btn-default" displayer displayLabel="mitigation" displayMode="list"/>
+                                </div>
+                            </form>
+                        </div>
+                        -->
+                    </div>
+                    <div class="user-dashboard" style="display:none" ps_landing="tabMitigations" dashboard>
+                        <h1>Mitigations</h1>
+                        <div>
+                            <ol class="breadcrumb breadcrumb-arrow" id="breadcrumbMitigations">
+                                <li><a href="javascript:void(0)" displayer displayLabel="mitigations" displayMode="list">Mitigations list</a></li>
+                            </ol>
+                        </div>
+                        <div label="mitigations" mode="list">
+                            <div id="headerMitigations" style=" margin-top: 10px; text-align: right">
+                                <button jmRefresh="mitigations" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                            </div>
+                            <div class="row">
+                                <table id="mitigationsTable" class="tabella cell-border compact stripe tabella" style="width:100%">
+                                    <thead class="tabHeader">
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>N° Hosts</th>
+                                        <th>Rules affected</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody jmTable="boxRows">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div label="mitigations" mode="form">
+                            <form >
+                                <div class="form-group">
+                                    <div id="mitigationFormGeneric">
+                                        <h4>Mitigation data</h4>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Date</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="mitigation_timestamp" name="mitigation_timestamp" >
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Mitigation status</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="mitigation_status" name="mitigation_status">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="mitigationHostAffected">
+                                        <h4>Host Affected</h4>
+                                        <div class="row">
+                                            <table id="affectedHostTable" class="tabella cell-border compact stripe tabella" style="width:100%">
+                                                <thead class="tabHeader">
+                                                <tr>
+                                                    <th>Hosts</th>
+                                                    <th>IP Address</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody jmTable="boxRows">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div id="mitigationRules">
+                                        <h4>Rules applied</h4>
+                                        <div class="row" id="mitigationRulesContainer">
+                                            <div class="input-group mb-10 col" jmRule="box">
+                                                <p jmRule="rule"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <input type="button" value="Back"   id="mitigationFormCancel" class=" btn btn-default" displayer displayLabel="mitigation" displayMode="list"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="user-dashboard" style="display:none" ps_landing="tabNetwork" dashboard>
+                        <h1>Network</h1>
+                        <div class="headers">
+                            <button jmRefresh="network" class="btn btn-primary" ><i class="fas fa-sync-alt iconFas"></i>Refresh network</button>
+                        </div>
+                        <div id='preloader_topology' class=preloader_inside><div class=loader></div></div>
+                        <div id="networkCanvas" style="height: 750px"></div>
+                        <!--
+                        <div id="chartContainer">
+                            <div class="row">
+                                <div class="row">
+                                    <div class="input-group mb-3 col-5">
+                                        <button class="btn btn-primary" id="refreshNetwork"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                                    </div>
+                                    <div id="box3d" class="input-group mb-3 col-5">
+                                        <button class="btn btn-primary" id="3DVersion"><span class="glyphicon glyphicon-refresh"></span> Switch to 3D</button>
+                                    </div>
+
+                                </div>
+                                <div class="row" style="display: none">
+                                    <div class="input-group mb-3 col-5">
+                                        <button class="btn btn-warning" id="collapseAll"><span class="glyphicon glyphicon-refresh"></span>Collapse All</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div id="3d-graph" style="height: 100px; width: 500px;"></div>
+                            </div>
+                            <div class="row">
+                                <div id="chart" ></div>
+                            </div>
+                        </div>
+                        -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--</div> -->
+    </div>
+<!-- /MAIN DASHBOARD -->
+<!-- MODAL -->
+    <div class="modal fade" id="logoutModal"    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Log out</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure to leave the <b>Cyber Trust</b> platform?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                    <button type="button" class="btn btn-primary" id="execLogout">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade " id="ownerModal"    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="">Select a device owner</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <table id="ownerTable" class="tabella display cell-border compact stripe" style="width:100%">
+                            <thead class="tabHeader">
+                            <tr>
+                                <th>#ID</th>
+                                <th>Name</th>
+                                <th>Lastname</th>
+                                <th>N°Devices</th>
+                            </tr>
+                            </thead>
+                            <tbody jmTable="boxRows">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                    <button type="button" class="btn btn-success" id="confirmOwner" disabled >Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade " id="vr"            tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >CyberTrust Network VR</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="modal fade" id="deviceModal">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="deviceModalTitle"></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div id="preloader_deviceModalBody" class="singlePreloader" style="display: none"><div class="loader"></div></div>
+                <div class="modal-body" id=deviceModalBody>
+                    <form id="form-device-add">
+                        <div id="formDevice-data">
+                            <h4>Device Data</h4>
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-lg-12">
+                                        <div class="form-group input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Description</i> </span>
+                                            </div>
+                                            <input name="description" class="form-control" placeholder="Device description" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-lg-6">
+                                        <div class="form-group input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">CPE</span>
+                                            </div>
+                                            <input name="cpe" class="form-control" placeholder="xx.yyyyyy.zzzz" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-lg-6">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="deviceFormType">Device type</label>
+                                            </div>
+                                            <select name="type" class="custom-select" id="deviceFormType">
+                                                <option selected>Select a type</option>
+                                                <option value="smartphone">Smartphone</option>
+                                                <option value="router">Router</option>
+                                                <option value="general">General</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div id="formDevice-hardware">
+                            <h4>Hardware data</h4>
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-lg-6">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <label class="input-group-text" for="deviceFormManufacturer">Device type</label>
+                                            </div>
+                                            <select name="manufacturer" class="custom-select" id="deviceFormManufacturer">
+                                                <option jmOption="deviceManufacturer">Select a manufacturer</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-lg-6">
+                                        <div class="form-group input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Model</span>
+                                            </div>
+                                            <input name="model" class="form-control" placeholder="Device model" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4 col-sm-4 col-lg-4">
+                                        <div class="form-group input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">ID</span>
+                                            </div>
+                                            <input name="hardware_id" class="form-control" placeholder="XXXXX.XXXXX" type="text">
+                                        </div>
+                                    </div>
+                                    <!-- Azzerati per ora
+                                    <div class="col-xs-4 col-sm-4 col-lg-4">
+                                        <div class="form-group input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">IP Address</span>
+                                            </div>
+                                            <input name="" class="form-control" placeholder="xxx.xxx.xxx.xxx" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4 col-lg-4">
+                                        <div class="form-group input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">MAC Address</span>
+                                            </div>
+                                            <input name="" class="form-control" placeholder="XX-XX-XX-XX-XX-XX" type="text">
+                                        </div>
+                                    </div>
+                                    -->
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div id="formDevice-os">
+                            <h4>Operative system</h4>
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <div class="col-xs-5 col-sm-5 col-lg-5">
+                                        <div class="form-group input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">OS</span>
+                                            </div>
+                                            <input name="name" class="form-control" placeholder="Operative system" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4 col-lg-4">
+                                        <div class="form-group input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Version</span>
+                                            </div>
+                                            <input name="version" class="form-control" placeholder="XX.YY.ZZZ" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-3 col-sm-3 col-lg-3">
+                                        <div class="form-group input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">SDK</span>
+                                            </div>
+                                            <input name="sdk" class="form-control" placeholder="SDK code" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div hidden>
+                            <input name="userId">
+                            <input name="ownerId">
+                            <input name="ownerType">
+                            <input name="ownerSmarthomeId">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Confirm</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="nodeModal">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="nodeModalTitle"></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <fieldset class="form-group">
+                        <div class="row">
+                            <div class="col-xs-8 col-sm-8 col-lg-8">
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Name</span>
+                                    </div>
+                                    <input jmField="machine_name" class="form-control" placeholder="" type="text" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-lg-4">
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">IP Address</span>
+                                    </div>
+                                    <input jmField="machine_ip" class="form-control" placeholder="" type="text" disabled>
+                                </div>
+                            </div>
+                            <div class="col-xs-8 col-sm-8 col-lg-8">
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">CPE</span>
+                                    </div>
+                                    <input jmField="machine_cpe" class="form-control" placeholder="" type="text" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Firewall
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-xs-6 col-sm-6 col-lg-6">
+                                                <div class="form-group input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Input</span>
+                                                    </div>
+                                                    <input jmField="machine_firewallIn" class="form-control" placeholder="" type="text" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-6 col-lg-6">
+                                                <div class="form-group input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Output</span>
+                                                    </div>
+                                                    <input jmField="machine_firewallOut" class="form-control" placeholder="" type="text" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Services
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12 col-lg-12">
+                                                <table id="machine_services" jmField="machine_services" class="tabella cell-border compact stripe tabella">
+                                                    <thead class="tabHeader">
+                                                    <tr>
+                                                        <th>IP</th>
+                                                        <th>Port</th>
+                                                        <th>Name</th>
+                                                        <th>Protocol</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody jmTable="boxRows">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="modal-footer">
+                    <!--<button type="button" class="btn btn-success" id="confirmReset">Confirm</button>-->
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/MODAL/-->
+</body>
+<!-- Jquery -->
+<script type="text/javascript" src="../js2/jquery-3.4.1.min.js"></script>
+<!-- AjaxForm -->
+<script type="text/javascript" src="../js2/jquery.form.min.js"></script>
+<!-- Popper -->
+<script type="text/javascript" src="../js2/popper/popper.min.js"></script>
+<!-- Bootstrap -->
+<script type="text/javascript" src="../js2/bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTable Full -->
+<script type="text/javascript" src="../js2/DataTables/datatables.min.js"></script>
+<!-- Datepicker -->
+<script src="../js2/jquery.datetimepicker.full.min.js"></script>
+<!-- Validator -->
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>-->
+<!-- GoldenLayout -->
+<!--<script type="text/javascript" src="../js2/goldenLayout/goldenlayout.min.js"></script>-->
+<!-- ChartJS -->
+<script type="text/javascript" src="../js2/ChartJS/Chart.bundle.min.js"></script>
+<!-- Gauge -->
+<script type="text/javascript" src="../js2/Gauge/gauge.min.js"></script>
+<!-- Moment -->
+<script type="text/javascript" src="../js2/moment.min.js"></script>
+<!-- Palette -->
+<script type="text/javascript" src="../js2/palette.js"></script>
+
+
+<script src="../js/chartjs.min.js"></script>
+<script type="text/javascript" src="../js/goldenlayout.js"></script>
+<!---<script type="text/javascript" src="Cancello__dati.js"></script>-->
+<link type="text/css" rel="stylesheet" href="../css/goldenlayout-base.css" />
+<link type="text/css" rel="stylesheet" href="../css/goldenlayout-cyber-theme.css" />
+<!--<link type="text/css" rel="stylesheet" href="../css2/goldenlayout-dark-theme.css" />-->
+<!-- Leaflet -->
+<link rel="stylesheet" href="../js2/leaflet/leaflet.css"/>
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="../js2/leaflet/leaflet.js"></script>
+<script src="../js2/leaflet/leaflet-heat.js"></script>
+<!--Network -->
+<script type="text/javascript" src="../js2/vis-network.min.js"></script>
+<script type="text/javascript" src="../js2/d3-hierarchy.min.js"></script>
+<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+<script src="//unpkg.com/3d-force-graph-vr"></script> <!-- Add -vr -->
+<!-- Pagina -->
+<script type="text/javascript" src="../js2/Common.js"></script>
+<script type="text/javascript" src="./isp.js"></script>
+<!-- Function for DataSource -->
+<script type="text/javascript" src="Misp.js"></script>
+<script type="text/javascript" src="../js2/profilingServices.js"></script>
+<script type="text/javascript" src="Suricata.js"></script>
+<!--<script type="text/javascript" src="Networks.js"></script>-->
+<script type="text/javascript" src="../../scripts/cytoscape/dist/cytoscape.min.js"></script>
+<script src="https://unpkg.com/layout-base@1.0.2/layout-base.js"></script>
+<script src="https://unpkg.com/avsdf-base/avsdf-base.js"></script>
+<script src="https://unpkg.com/cose-base@1.0.3/cose-base.js"></script>
+<script src="https://unpkg.com/cytoscape-graphml/cytoscape-graphml.js"></script>
+<script src="https://raw.githack.com/iVis-at-Bilkent/cytoscape.js-layvo/unstable/cytoscape-layvo.js"></script>
+<script type="text/javascript" src="../../scripts/cytoscape-cise/cytoscape-cise.js"></script>
+<script type="text/javascript" src="./NetworkTopology.js"></script>
+<script src="../host.js"></script>
+</html>

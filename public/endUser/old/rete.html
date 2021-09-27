@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+    <title>Network | Basic usage</title>
+
+    <script type="text/javascript" src="../js/vis.min.js"></script>
+    <link href="../css/vis.min.css" rel="stylesheet" type="text/css" />
+
+    <style type="text/css">
+        #mynetwork {
+            width: 600px;
+            height: 400px;
+            border: 1px solid lightgray;
+            background-color:#333333;
+        }
+
+        p {
+            max-width:800px;
+        }
+    </style>
+</head>
+<body>
+
+<p>
+    There are a lot of options with colors. You can manually define a color or inherit the color from the nodes. You can set the opacity
+    to override any opacity given by a color. <b>IN ORDER TO USE THE OPACITY, BOTH THE NODES AND THE EDGES NEED COLORS IN HEX OR RGB</b>!
+</p>
+
+<div id="mynetwork"></div>
+
+<script type="text/javascript">
+    // create an array with nodes
+    var nodes = new vis.DataSet([
+        {id: 1, label: 'node\none',     shape: 'dot', color:'#97C2FC', size:'10'},
+        {id: 2, label: 'node\ntwo',     shape: 'dot', color:'#97C2FC', size:'10'},
+        {id: 3, label: 'node\nthree',   shape: 'dot', color:'#97C2FC', size:'10'},
+        {id: 4, label: 'node\nfour',    shape: 'dot', color:'#97C2FC', size:'10'},
+        {id: 5, label: 'node\nfive',    shape: 'dot', color:'#97C2FC', size:'10'},
+        {id: 6, label: 'node\nsix',     shape: 'dot', color:'#97C2FC', size:'10'},
+        {id: 7, label: 'node\nseven',   shape: 'dot', color:'#97C2FC', size:'10'},
+        {id: 8, label: 'node\neight',   shape: 'dot', color:'#97C2FC', size:'10'}
+    ]);
+
+    // create an array with edges
+    var edges = new vis.DataSet([
+        {from: 1, to: 8, color:{color:'#ff0000'}},
+        {from: 1, to: 3, color:{color:'#ff0000'}},
+        {from: 1, to: 2, color:{color:'#ff0000'}},
+        {from: 2, to: 4, color:{color:'#ff0000'}},
+        {from: 2, to: 5, color:{color:'#ff0000'}},
+        {from: 5, to: 6, color:{color:'#ff0000'}},
+        {from: 6, to: 7, color:{color:'#ff0000'}},
+        {from: 6, to: 8, color:{color:'#ff0000'}},
+    ]);
+
+    // create a network
+    var container = document.getElementById('mynetwork');
+    var data = {
+        nodes: nodes,
+        edges: edges
+    };
+    var options = {
+        nodes: {
+            shape: 'circle'
+        }
+    };
+    var network = new vis.Network(container, data, options);
+</script>
+
+
+</body>
+</html>

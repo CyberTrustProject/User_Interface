@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="Cyber Trust">
+    <meta name="author" content="Mathema srl">
+    <meta name="keyword" content="Cyber Trust by Mathema">
+    <title>Cyber Trust</title>
+    <!-- Icons-->
+    <link href="public/vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+    <link href="public/vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <link href="public/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="public/vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <!-- Main styles for this application-->
+    <link href="public/css/style.css" rel="stylesheet">
+    <link href="public/vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+    <link href="public/css/cyber.css" rel="stylesheet">
+
+    <script type="text/javascript" src="public/js/jquery.js"></script>
+    <script type="text/javascript" src="public/js/jquery.json-1.3.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            raccattaDati('uno');
+            raccattaDati('due');
+            raccattaDati('tre');
+        });
+        var  raccattaDati = function(label){
+            var ev = new EventSource('/EM.test');
+            ev.addEventListener('time', function (result) {
+                console.log(label + " " +result.data);
+            })
+        }
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

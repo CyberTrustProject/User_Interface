@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<!--
+* CoreUI - Free Bootstrap Admin Template
+* @version v2.0.0
+* @link https://coreui.io
+* Copyright (c) 2018 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://coreui.io/license)
+-->
+<html lang="en">
+<head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="Cyber Trust">
+    <meta name="author" content="Mathema srl">
+    <meta name="keyword" content="Cyber Trust by Mathema">
+    <title>Cyber Trust</title>
+    <!-- Icons-->
+    <link href="vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+    <link href="vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <!-- Main styles for this application-->
+    <script src="js/jquery.js"></script>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+    <link href="css/cyber.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/goldenlayout.js"></script>
+    <script type="text/javascript" src="dati.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/goldenlayout-base.css" />
+    <link type="text/css" rel="stylesheet" href="css/goldenlayout-cyber-theme.css" />
+    <!-- Vis-->
+    <script type="text/javascript" src="js/vis.min.js"></script>
+    <link href="css/vis.min.css" rel="stylesheet" type="text/css" />
+    <!-- -->
+    <script src="js/cyber.js"></script>
+    <link href="slider.css" rel="stylesheet" type="text/css" />
+    <link href="tab.css" rel="stylesheet" type="text/css" />
+    <!-- DatePicker-->
+    <script src="https://www.eyecon.ro/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <link href="https://www.eyecon.ro/bootstrap-datepicker/css/datepicker.css" rel="stylesheet">
+    <script type="text/javascript">
+        var mem = {};
+        if(window.sessionStorage.getItem('offlineData')){
+            mem['data'] = JSON.parse(window.sessionStorage.getItem('offlineData'));
+        }
+        $(document).ready(function() {
+            loadDevice();
+            $("#addUtente").click(function(){
+                $("#listaUtenti").hide();
+                $("#datiUtenti").hide();
+                $("#nuovoUtente").show();
+            });
+            $("[backUtente]").click(function(){
+                $("#listaUtenti").show();
+                $("#datiUtenti").show();
+                $("#nuovoUtente").hide();
+            })
+            $("#addCompany").click(function(){
+                $("#listaCompany").hide();
+                $("#datiCompany").hide();
+                $("#nuovoCompany").show();
+            });
+            $("[backCompany]").click(function(){
+                $("#listaCompany").show();
+                $("#datiCompany").show();
+                $("#nuovoCompany").hide();
+            })
+            $("#addDevice").click(function(){
+                $("#listaDevice").hide();
+                $("#datiDevice").hide();
+                $("#nuovoDevice").show();
+            });
+            $("[backDevice]").click(function(){
+                $("#listaDevice").show();
+                $("#datiDevice").show();
+                $("#nuovoDevice").hide();
+            })
+            $("#addClass").click(function(){
+                $("#listaClass").hide();
+                $("#datiClass").hide();
+                $("#nuovoClass").show();
+            });
+            $("[backClass]").click(function(){
+                $("#listaClass").show();
+                $("#datiClass").show();
+                $("#nuovoClass").hide();
+            })
+        });
+        function loadDevice(){
+            if(mem['data']['device']){
+                var data = mem['data']['device'];
+                if(!mem['tableRow']){
+                    mem['tableRow'] = $("[jmTable=row]").clone(1,1);
+                }
+                $("[jmTable=boxRows]").empty();
+                data.forEach(function(row){
+                    var $row = mem['tableRow'].clone(1,1);
+                    Object.keys(row).forEach(function(key){
+                        $("[jmTable="+key+"]", $row).empty().append(row[key]);
+                    });
+                    var color = 'success';
+                    if(row['trust_level'] > 66){
+                        color = 'danger';
+                    }else if(row['trust_level'] > 33){
+                        color = 'warning';
+                    }
+                    $("[jmTable=trust_lvl]", $row).attr('class', "progress-bar bg-"+color).attr('style', "width:"+row['trust_level']+"%");
+                    $row.click(function(){
+                        window.sessionStorage.setItem('deviceData', JSON.stringify(row));
+                        location.href = "device_profilesdm.html";
+                    });
+                    $("[jmTable=boxRows]").append($row);
+                });
+            }
+        }
+    </script>
+</head>
+<body class="app header-fixed sidebar-fixedOLD aside-menu-fixedOLD sidebar-lg-show">
+<header class="app-header navbar"> <a class="navbar-brand" href="../index.html"> <img class="navbar-brand-full logo" src="img/brand/logo_bn.png" alt="CoreUI Logo"> <img class="navbar-brand-minimized" src="img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo"> </a>
+    <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item d-md-down-none"> <a class="nav-link" href="#"> <i class="icon-clock"></i> <span i)d="clock" class="clock"><span i_d="clock" class="clock">Mon, Mar 11th 2019, 09:40:55</span></span> </a> </li>
+        <li class="nav-item d-md-down-none"> <a class="nav-link" href="#"> <i class="icon-user"></i> <span id="user" class="user">Smart Device Manifacturer</span> </a> </li>
+        <!--<li class="nav-item d-md-down-none"> <a class="nav-link" href="#"> <i class="icon-bell"></i> <span class="badge badge-pill badge-danger">5</span> </a> </li>-->
+    </ul>
+    <!--<button class="icon_button" type="button" id="addwidget"> <span class="plus-icon"></span> </button>
+    <button class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" data-toggle="aside-menu-lg-show" id="toggle"> <span class="navbar-toggler-icon"></span> <span class="badge badge-pill badge-danger">2</span> </button>
+    <button class="navbar-toggler aside-menu-toggler d-lg-none" type="button" data-toggle="aside-menu-show"> <span class="navbar-toggler-icon"></span> <span class="badge badge-pill badge-danger">2</span> </button>
+    -->
+</header>
+<div class="app-body">
+    <main class="main">
+        <div class="tab-content"  style="background-color: #fcfcfc">
+            <h1>Cyber Trust</h1>
+            <div>
+                <div class="form-group">
+                    <span>Registration and DataManagement Portal</span>
+                </div>
+            </div>
+        </div>
+        <div class="panel with-nav-tabs panel-default">
+            <div class="panel-heading">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab1default" data-toggle="tab">Device</a></li>
+                    <!--<li class="active"><a href="#tab3default" data-toggle="tab">Users</a></li>
+                    <li class=""><a href="#tab4default" data-toggle="tab">Company</a></li>
+
+                    <li class=""><a href="#tab2default" data-toggle="tab">Class</a></li>
+                    -->
+                </ul>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="tab1default" style="background-color: #fcfcfc">
+                        <div id="listaDevice"  style=" margin-top: 10px">
+                            <h1>Device List</h1>
+                            <div id="headerDevice" style=" margin-top: 10px; text-align: right">
+                                <input id="addDevice" type="button" value="Add new Device">
+                            </div>
+                            <table class="table table-hover">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Mac</th>
+                                <th scope="col">Device</th>
+                                <th scope="col">Interface</th>
+                                <th scope="col">Risk level</th>
+                                <th scope="col">Operative System</th>
+                                <th scope="col">Firmware version</th>
+                            </tr>
+                            </thead>
+                            <tbody jmTable="boxRows">
+                            <tr jmTable="row" onclick="javascript:location.href='device_profilesdm.html'">
+                                <th jmTable="id" scope="row">1</th>
+                                <td jmTable="mac">02-00-00-00-00-02</td>
+                                <td jmTable="device">Smartphone1</td>
+                                <td jmTable="interface">Wifi</td>
+                                <td><div class="progress">
+                                    <div jmTable="trust_lvl" class="progress-bar bg-success" role="progressbar" style="width: 15%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div></td>
+                                <td jmTable="os">Ubuntu CORE</td>
+                                <td jmTable="firmware">AS.355.873512</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                        <div id="nuovoDevice" style="display: none;margin-top: 10px">
+                            <div style="background-color: #fcfcfc">
+                                <h1>New Device</h1>
+                                <div class="form-group">
+                                    <label>Device ID: </label><input type="text"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>MAC address: </label><input type="text"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Device name: </label><input type="text"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Connection interface: </label>
+                                    <select>
+                                        <option selected>Choose a type of connection</option>
+                                        <option>WI-FI</option>
+                                        <option>Cable</option>
+                                        <option>Bluethoot</option>
+                                        <option>Wi-Fi/Bluethoot</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Class: </label>
+                                    <select>
+                                        <option selected>Choose a class</option>
+                                        <option>Class I</option>
+                                        <option>Class II</option>
+                                        <option>Class III</option>
+                                        <option>Class IV</option>
+                                    </select>
+                                </div>
+                                <div class="form-actions" style="text-align: right">
+                                    <input type="button" value="Cancel"     backDevice/>
+                                    <input type="button" value="Confirm"    backDevice/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade in " id="tab3default" style="background-color: #fcfcfc" kind="users">
+                        <div id=listaUtenti style=" margin-top: 10px">
+                            <h1>Users List</h1>
+                            <div id="headerUtenti" style=" margin-top: 10px; text-align: right">
+                                <input id="addUtente" type="button" value="Add new User">
+                            </div>
+                            <table class="table table-hover">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Nickname</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Agency/Company</th>
+                                    <th scope="col">Last login</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr nome="michele">
+                                    <th jmTable="id">Michele Simioli</th>
+                                    <td jmTable="mac">Cyber Trust Administrator</td>
+                                    <td jmTable="device">Mathema</td>
+                                    <td jmTable="interface">2019/03/04</td>
+                                </tr>
+                                <tr nome="ema">
+                                    <th jmTable="id">Emanuele Bellini</th>
+                                    <td jmTable="mac">Registration Manager</td>
+                                    <td jmTable="device">Mathema</td>
+                                    <td jmTable="interface">2019/03/16</td>
+                                </tr>
+                                <tr nome="simone">
+                                    <th jmTable="id">Simone Naldini</th>
+                                    <td jmTable="mac">Company Technician</td>
+                                    <td jmTable="device">Mathema</td>
+                                    <td jmTable="interface">2019/03/17</td>
+                                </tr>
+                                <tr nome="abel">
+                                    <th jmTable="id">Alessandro Bellini</th>
+                                    <td jmTable="mac">Company Manager</td>
+                                    <td jmTable="device">Mathema</td>
+                                    <td jmTable="interface">2019/03/14</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="datiUtenti" style="display: none;margin-top: 10px">
+                            <div style="display: none; background-color: #fcfcfc" utente="michele">
+                                <h1>Michele Simioli</h1>
+                                <div class="form-group">
+                                    <label>Username: </label><i>msimioli@cybertrust.com</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password: </label><i>***************</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Company: </label><i>Mathema</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Role: </label>
+                                    <select>
+                                        <option>Administrator</option>
+                                        <option selected>Technical Operator</option>
+                                        <option>Agent</option>
+                                        <option>Viewer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="display: none; background-color: #fcfcfc" utente="ema">
+                                <h1>Emanuele</h1>
+                                <div class="form-group">
+                                    <label>Username: </label><i>ebellini@cybertrust.com</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password: </label><i>***************</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Company: </label><i>Mathema</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Role: </label>
+                                    <select>
+                                        <option>Administrator</option>
+                                        <option selected>Technical Operator</option>
+                                        <option>Agent</option>
+                                        <option>Viewer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="display: none; background-color: #fcfcfc" utente="simone">
+                                <h1>Simone Naldini</h1>
+                                <div class="form-group">
+                                    <label>Username: </label><i>snaldini@cybertrust.com</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password: </label><i>***************</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Company: </label><i>Mathema</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Role: </label>
+                                    <select>
+                                        <option>Administrator</option>
+                                        <option selected>Technical Operator</option>
+                                        <option>Agent</option>
+                                        <option>Viewer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="display: none; background-color: #fcfcfc" utente="abel">
+                                <h1>Alessandro Bellini</h1>
+                                <div class="form-group">
+                                    <label>Username: </label><i>abel@cybertrust.com</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password: </label><i>***************</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Company: </label><i>Mathema</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Role: </label>
+                                    <select>
+                                        <option>Administrator</option>
+                                        <option>Technical Operator</option>
+                                        <option  selected>Agent</option>
+                                        <option>Viewer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-actions" style="text-align: right">
+                                <input type="button" value="Cancel"     id="annulla"/>
+                                <input type="button" value="Confirm"    id="conferma"/>
+                            </div>
+                        </div>
+                        <div id="nuovoUtente" style="display: none;margin-top: 10px">
+                            <div style="background-color: #fcfcfc" utente="michele">
+                                <h1>New User</h1>
+                                <div class="form-group">
+                                    <label>Nickname: </label><input type="text"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Username: </label><input type="text"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password: </label><input type="text"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Company: </label><input type="text"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Role: </label>
+                                    <select>
+                                        <option selected>Choose a role</option>
+                                        <option>Cyber Trust Administrator</option>
+                                        <option>Registration Manager</option>
+                                        <option>Company Manager</option>
+                                        <option>Company Technician</option>
+                                    </select>
+                                </div>
+                                <div class="form-actions" style="text-align: right">
+                                    <input type="button" value="Cancel"     backUtente/>
+                                    <input type="button" value="Confirm"    backUtente/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade in" id="tab4default" style="background-color: #fcfcfc" kind="company">
+                        <div id=listaCompany style=" margin-top: 10px">
+                            <h1>Company List</h1>
+                            <div id="headerCompany" style=" margin-top: 10px; text-align: right">
+                                <input id="addCompany" type="button" value="Add new company">
+                            </div>
+                            <table class="table table-hover">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Company Name</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Headquarters</th>
+                                    <th scope="col">Website</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr nome="michele">
+                                    <th jmTable="id">Google</th>
+                                    <td jmTable="mac">Subsidiary</td>
+                                    <td jmTable="device">1600 Amphitheatre Parkway, Mountain View, California</td>
+                                    <td jmTable="interface">google.com</td>
+                                </tr>
+                                <tr nome="ema">
+                                    <th jmTable="id">Cisco</th>
+                                    <td jmTable="mac">Public</td>
+                                    <td jmTable="device">San Jose, California</td>
+                                    <td jmTable="interface">cisco.com</td>
+                                </tr>
+                                <tr nome="ema">
+                                    <th jmTable="id">Mathema</th>
+                                    <td jmTable="mac">Public</td>
+                                    <td jmTable="device">Firenze, Italy</td>
+                                    <td jmTable="interface">mathema.com</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="datiCompany" style="display: none;margin-top: 10px">
+                            <div style="display: none; background-color: #fcfcfc" utente="michele">
+                                <h1>Michele Simioli</h1>
+                                <div class="form-group">
+                                    <label>Username: </label><i>msimioli@cybertrust.com</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password: </label><i>***************</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Company: </label><i>Mathema</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Role: </label>
+                                    <select>
+                                        <option>Administrator</option>
+                                        <option selected>Technical Operator</option>
+                                        <option>Agent</option>
+                                        <option>Viewer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="display: none; background-color: #fcfcfc" utente="ema">
+                                <h1>Emanuele</h1>
+                                <div class="form-group">
+                                    <label>Username: </label><i>ebellini@cybertrust.com</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password: </label><i>***************</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Company: </label><i>Mathema</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Role: </label>
+                                    <select>
+                                        <option>Administrator</option>
+                                        <option selected>Technical Operator</option>
+                                        <option>Agent</option>
+                                        <option>Viewer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="display: none; background-color: #fcfcfc" utente="simone">
+                                <h1>Simone Naldini</h1>
+                                <div class="form-group">
+                                    <label>Username: </label><i>snaldini@cybertrust.com</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password: </label><i>***************</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Company: </label><i>Mathema</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Role: </label>
+                                    <select>
+                                        <option>Administrator</option>
+                                        <option selected>Technical Operator</option>
+                                        <option>Agent</option>
+                                        <option>Viewer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="display: none; background-color: #fcfcfc" utente="abel">
+                                <h1>Alessandro Bellini</h1>
+                                <div class="form-group">
+                                    <label>Username: </label><i>abel@cybertrust.com</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password: </label><i>***************</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Company: </label><i>Mathema</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Role: </label>
+                                    <select>
+                                        <option>Administrator</option>
+                                        <option>Technical Operator</option>
+                                        <option  selected>Agent</option>
+                                        <option>Viewer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-actions" style="text-align: right">
+                                <input type="button" value="Cancel"     id="annulla"/>
+                                <input type="button" value="Confirm"    id="conferma"/>
+                            </div>
+                        </div>
+                        <div id="nuovoCompany" style="display: none;margin-top: 10px">
+                            <div style="background-color: #fcfcfc" utente="michele">
+                                <h1>New Company</h1>
+                                <div class="form-group">
+                                    <label>Company Name: </label><input type="text"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Type: </label><input type="text"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Headquarters: </label><input type="text"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Website: </label><input type="text"/>
+                                </div>
+                                <div class="form-actions" style="text-align: right">
+                                    <input type="button" value="Cancel"     backCompany/>
+                                    <input type="button" value="Confirm"    backCompany/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade in" id="tab2default" style="background-color: #fcfcfc" kind="class">
+                        <div id=listaClass style=" margin-top: 10px">
+                            <h1>Device Classes</h1>
+                            <div id="headerClass" style=" margin-top: 10px; text-align: right">
+                                <input id="addClass" type="button" value="Add new Class">
+                            </div>
+                            <table class="table table-hover">
+                                <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Class</th>
+                                    <th scope="col">Source</th>
+                                    <th scope="col">Date Added</th>
+                                    <th scope="col">N. of Device</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr nome="">
+                                    <th jmTable="id">Class I</th>
+                                    <td jmTable="mac">https://standards.ieee.org/initiatives/iot/index.html</td>
+                                    <td jmTable="device">2019/01/01</td>
+                                    <td jmTable="interface">124</td>
+                                    <td jmTable="">
+                                        <img src="img/recicle.png" height="20px">
+                                    </td>
+                                </tr>
+                                <tr nome="">
+                                    <th jmTable="id">Class II</th>
+                                    <td jmTable="mac">https://standards.ieee.org/initiatives/iot/index.html</td>
+                                    <td jmTable="device">2019/01/01</td>
+                                    <td jmTable="interface">32</td>
+                                    <td jmTable="">
+                                        <img src="img/recicle.png" height="20px">
+                                    </td>
+                                </tr>
+                                <tr nome="">
+                                    <th jmTable="id">Class III</th>
+                                    <td jmTable="mac">https://standards.ieee.org/initiatives/iot/index.html</td>
+                                    <td jmTable="device">2019/01/01</td>
+                                    <td jmTable="interface">246</td>
+                                    <td jmTable="">
+                                        <img src="img/recicle.png" height="20px">
+                                    </td>
+                                </tr>
+                                <tr nome="">
+                                    <th jmTable="id">Class IV</th>
+                                    <td jmTable="mac">https://standards.ieee.org/initiatives/iot/index.html</td>
+                                    <td jmTable="device">2019/01/01</td>
+                                    <td jmTable="interface">45</td>
+                                    <td jmTable="">
+                                        <img src="img/recicle.png" height="20px">
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="datiClass" style="display: none;margin-top: 10px">
+                            <div style="display: none; background-color: #fcfcfc" utente="michele">
+                                <h1>Michele Simioli</h1>
+                                <div class="form-group">
+                                    <label>Username: </label><i>msimioli@cybertrust.com</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password: </label><i>***************</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Company: </label><i>Mathema</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Role: </label>
+                                    <select>
+                                        <option>Administrator</option>
+                                        <option selected>Technical Operator</option>
+                                        <option>Agent</option>
+                                        <option>Viewer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="display: none; background-color: #fcfcfc" utente="ema">
+                                <h1>Emanuele</h1>
+                                <div class="form-group">
+                                    <label>Username: </label><i>ebellini@cybertrust.com</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password: </label><i>***************</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Company: </label><i>Mathema</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Role: </label>
+                                    <select>
+                                        <option>Administrator</option>
+                                        <option selected>Technical Operator</option>
+                                        <option>Agent</option>
+                                        <option>Viewer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="display: none; background-color: #fcfcfc" utente="simone">
+                                <h1>Simone Naldini</h1>
+                                <div class="form-group">
+                                    <label>Username: </label><i>snaldini@cybertrust.com</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password: </label><i>***************</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Company: </label><i>Mathema</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Role: </label>
+                                    <select>
+                                        <option>Administrator</option>
+                                        <option selected>Technical Operator</option>
+                                        <option>Agent</option>
+                                        <option>Viewer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div style="display: none; background-color: #fcfcfc" utente="abel">
+                                <h1>Alessandro Bellini</h1>
+                                <div class="form-group">
+                                    <label>Username: </label><i>abel@cybertrust.com</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password: </label><i>***************</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Company: </label><i>Mathema</i>
+                                </div>
+                                <div class="form-group">
+                                    <label>Role: </label>
+                                    <select>
+                                        <option>Administrator</option>
+                                        <option>Technical Operator</option>
+                                        <option  selected>Agent</option>
+                                        <option>Viewer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-actions" style="text-align: right">
+                                <input type="button" value="Cancel"     id="annulla"/>
+                                <input type="button" value="Confirm"    id="conferma"/>
+                            </div>
+                        </div>
+                        <div id="nuovoClass" style="display: none;margin-top: 10px">
+                            <div style="background-color: #fcfcfc">
+                                <h1>New Device Class</h1>
+                                <div class="form-group">
+                                    <label>Class label: </label><input type="text"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Source: </label><input type="text"/>
+                                </div>
+                                <div class="form-actions" style="text-align: right">
+                                    <input type="button" value="Cancel"     backClass/>
+                                    <input type="button" value="Confirm"    backClass/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<!-- CoreUI and necessary plugins-->
+<script src="vendors/jquery/js/jquery.min.js"></script>
+<script src="vendors/popper.js/js/popper.min.js"></script>
+<script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="vendors/pace-progress/js/pace.min.js"></script>
+<script src="vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+<script src="vendors/@coreui/coreui-pro/js/coreui.min.js"></script>
+<!-- Plugins and scripts required by this view-->
+<script src="js/chartjs.min.js"></script>
+<script src="js/custom-tooltips.min.js"></script>
+<script src="js/moment-with-locales.js"></script>
+<!-- script src="js/main.js"></script -->
+<script src="js/cyber.js"></script>
+<!-- script src="js/charts.js"></script -->
+</body>
+</html>

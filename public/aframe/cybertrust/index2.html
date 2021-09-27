@@ -1,0 +1,145 @@
+﻿<html>
+<head>
+    <script src="js/build.js"></script>
+    <!-- <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script> -->
+    <!-- <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script> -->
+    <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+    
+	<script src="js/jquery.min.js"></script>
+    <script src="js/crossfilter.js"></script>
+    <!-- script src="js/aframe-v0.5.0.js"></script -->
+    <script src="js/aframe-animation-component.min.js"></script>
+    <script src="js/aframe-text-geometry-component.min.js"></script>
+    <script src="js/aframe-mouse-cursor-component.min.js"></script>
+    <script src="js/aframedc.js"></script>
+    <script src="js/demoWEBVR.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/drag.css">
+    <title>Cyber Trust Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<button id="replayer-button" type="button" onclick="playDemoRecording()">
+      Don't have a Vive, Rift, Daydream, or GearVR handy? Click here for a preview.
+    </button>
+    <div id="myscene">
+        <a-scene avatar-recorder
+             touch-to-click-converter>
+            <a-assets>
+                <a-mixin id="sph" geometry="primitive:sphere"></a-mixin>
+                <a-mixin id="transparente" material="transparent:true;opacity:0.4"></a-mixin>
+                <img id="city" src="img/fondo.jpg" />
+                <img id="ground" src="img/dirt.png" />
+                <img id="logo" src="img/logo_cybertrust.png" />
+                <img id="portal-preview" src="img/physics.jpg"></img>
+                <a-mixin id="pointer" raycaster="showLine: true; objects: .cube, a-link"
+                          super-hands="colliderEvent: raycaster-intersection;
+                                       colliderEventProperty: els;
+                                       colliderEndEvent:raycaster-intersection-cleared;
+                                       colliderEndEventProperty: clearedEls;">
+                </a-mixin>
+                <a-mixin id="controller-right" mixin="pointer"
+                         vive-controls="hand: right" oculus-touch-controls="hand: right"
+                         windows-motion-controls="hand: right"
+                         gearvr-controls daydream-controls oculus-go-controls>
+                </a-mixin>
+                <a-mixin id="controller-left" mixin="pointer"
+                         vive-controls="hand: left" oculus-touch-controls="hand: left"
+                         windows-motion-controls="hand: left">
+                </a-mixin>
+                <a-mixin id="cube" geometry="primitive: box; width: 0.5; height: 0.5; depth: 0.5"
+                         hoverable grabbable stretchable draggable droppable
+                         shadow
+                         event-set__dragdrop="_event: drag-drop; geometry.radius: 0.25; geometry.primitive: sphere"
+                         event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                         event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"
+                         event-set__dragon="_event: dragover-start; material.wireframe: true"
+                         event-set__dragoff="_event: dragover-end; material.wireframe: false">
+                </a-mixin>
+            </a-assets>
+            <a-entity>
+                  <a-entity id="rhand" mixin="controller-right"></a-entity>
+                  <a-entity id="lhand" mixin="controller-left"></a-entity>
+            </a-entity>
+            <a-entity class="cube" mixin="cube" position="0 1 -1.25" material="color: red"></a-entity>
+              <a-entity class="cube" mixin="cube" position="0 1.6 -1.5" material="color: orange"></a-entity>
+              <a-entity class="cube" mixin="cube" position="-0.9 1 -0.9" material="color: blue"></a-entity>
+              <a-entity class="cube" mixin="cube" position="-1 1.6 -1" material="color: mediumspringgreen"></a-entity>
+              <a-entity class="cube" mixin="cube" position="0.9 1 -0.9" material="color: green"></a-entity>
+              <a-entity class="cube" mixin="cube" position="1 1.6 -1" material="color: palevioletred"></a-entity>
+
+            <a-entity id="skymap" envmap="imgprefix:img/signoria-;extension:png"></a-entity>
+            <a-entity camera look-controls wasd-controls position="-0.41 6 9.7" rotation="3.54 0.415 0" mouse-cursor>
+            </a-entity>
+            <a-entity id="target" position="0 0 0"></a-entity>
+
+
+            <a-entity id="totem" position="1 6 -20.5 " geometry="primitive:box;depth:3;height:20;width:12"
+                       material="color: grey" class="cube">
+               
+                <a-plane color="#FFF" height="17" width="11.5" position="0 1 1.55"></a-plane>
+                <a-entity position="-2.2 6.9 1.61" text-geometry="value:CYBERTRUST;"
+                          material="color:black"></a-entity>
+                <a-entity id="text"
+                          geometry="primitive: box; width: 10;height:2.27; depth: 0.01"
+                          material="color:white"
+                          position="0 -2 1.6"
+                          text="color: black; align: center; value: 
+    Control room operator
+    Internet Service Provider
+    Network operator
+; width: 11; wrapCount: 30;anchor:center;zOffset: 0.1"
+                          animation__color="property:text.color;to:#000;from:#FF0;startEvents:mouseenter">
+
+                </a-entity>
+                <a-image src="#logo" width="6" height="6" position="0.24 3 1.65"></a-image>
+                <!-- a-entity id="textchnback"
+                          geometry="primitive: box; width: 11;height:1.00; depth: 0.01"
+                          material="color:white"
+                          position="0.24 -4.14 1.65"
+                          text="color: black; align: left; value:change background; width: 11; wrapCount: 30;anchor:center;zOffset: 0.1">
+
+                </a-entity>
+                <a-entity  id="filterinfo"
+                          geometry="primitive: box; width: 11;height:1.2; depth: 0.01"
+                          material="color:white"
+                          position="0.24 -5.267 1.65"
+                          text="color: black; align: left; value: current filters are:; width: 11; wrapCount: 30;anchor:center;zOffset: 0.1">
+                </a-entity> 
+                
+                <a-entity id="textclearindex"
+                          geometry="primitive: box; width: 11;height:1.2; depth: 0.01"
+                          material="color:white"
+                          position="0.24 -6.49 1.65"
+                          text="color: black; align: left; value: clear filters; width: 11; wrapCount: 30;anchor:center;zOffset: 0.1">
+                </a-entity -->
+            </a-entity>
+
+            <!-- Textured circle parallel to ground. -->
+            <a-circle id="checkpointa" material="color:blue" radius="1" position="0 0.1 4.6" rotation="-90 0 0"></a-circle>
+            <a-circle id="checkpointb" material="color:red" radius="1" position="-20.12 0.1 6.62" rotation="-90 0 0"></a-circle>
+            <!-- adding a ground -->
+            <a-circle id="groundentity" rotation="-90 0 0" material="src: #ground;repeat: 5 5" radius="60" position="0 -1 0" visible="false"></a-circle>
+
+      
+            <!--<a-entity id="toggleground"
+                      position="-30 3 15"
+                      rotation="0 130 0"
+                      text="color: grey; align: right; value: TOGGLE GROUND; width: 18; wrapCount: 30 ">
+            </a-entity>-->
+        </a-scene>
+    </div>
+
+
+
+
+
+
+    
+</body>
+</html>

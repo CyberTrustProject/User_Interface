@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="Cyber Trust">
+    <meta name="author" content="Mathema srl">
+    <meta name="keyword" content="Cyber Trust by Mathema">
+    <title>Cyber Trust</title>
+    <!-- CSS -->
+    <!-- Bootstrap -->
+    <link href="../js2/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <!-- Dashboard -->
+    <link href="../css2/dashboard_lea.css" rel="stylesheet" id="dashboard-css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <!-- Datepicker -->
+    <link href="../css2/jquery.datetimepicker.min.css" rel="stylesheet">
+    <!-- Timezone -->
+    <link href="../js2/distTimeZone/styles/timezone-picker.css" rel="stylesheet">
+    <!-- Various -->
+    <link href="../css2/cybertrust.css" rel="stylesheet" id="cybertrust-css">
+    <!-- DataTable -->
+    <link rel="stylesheet" type="text/css" href="../js2/DataTables/datatables.min.css"/>
+    <!-- GoldenLayout -->
+    <link type="text/css" rel="stylesheet" href="../js2/goldenLayout/goldenlayout-base.css" />
+    <link type="text/css" rel="stylesheet" href="../js2/goldenLayout/goldenlayout-light-theme.css" />
+    <!-- ChartJS -->
+    <link type="text/css" rel="stylesheet" href="../js2/ChartJS/Chart.min.css"/>
+    <!-- Context Menu -->
+    <link rel="stylesheet" href="../js2/contextMenu/jquery.contextMenu.min.css">
+    <!-- Jquery UI -->
+    <link rel="stylesheet" href="../js2/jquery-ui/jquery-ui.min.css">
+</head>
+<body class="fixed-sn light-purple-skin">
+<!-- MAIN DASHBOARD -->
+<div class="container-fluid">
+    <div class="row" style="height: 100%;">
+        <div class="col-md-2 col-sm-1" id="navigation">
+            <div class="logo">
+                <a hef="home.html"><img src="../images/logo_cybertrust.png" alt="cybertrust_logo" class="hidden-xs hidden-sm"></a>
+            </div>
+            <div class="navi">
+                <ul>
+                    <li>  <a href="./lea_home.html"         >  <i class="fa fa-align-justify" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Cases</span></a></li>
+                    <li target='dashOMCP'   class="active"  >  <a href="javascript:void(0);">    <i class="fa fa-area-chart"    aria-hidden="true"></i><span class="hidden-xs hidden-sm">OMCP</span></a></li>
+                    <li target='dashComponents'             >  <a href="javascript:void(0);">    <i class="fa fa-laptop"        aria-hidden="true"></i><span class="hidden-xs hidden-sm">Devices</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10 col-sm-11 contentbox">
+            <div class="leaPalette container-width-fluid" >
+                <a class="navbar-brand leaPalette noManina" href="javascript:void(0);">LEA - Case <b id="caseIdentifier"></b></a>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light leaPalette ml-auto" >
+                    <li class="nav-item d-md-down-none" style="text-align: right;" >
+                        <div class='logout' id="logoutUser"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</div>
+                    </li>
+                </nav>
+            </div>
+            <div class="user-dashboard" landing="dashOMCP">
+                <h1>OMCP Time Machine</h1>
+                <div id="controls">
+                    <div class="form-group">
+                        <h5>Timespan</h5>
+                        <div id="omcpDateTime">
+                            <div class="row">
+                                <div class="input-group mb-3 col-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">From</span>
+                                    </div>
+                                    <input type="text" class="form-control date" id="from_dt"  />
+                                </div>
+                                <div class="input-group mb-3 col-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">To</span>
+                                    </div>
+                                    <input type="text" class="form-control date" id="to_dt"/>
+                                </div>
+                                <div class="input-group mb-3 col-6">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Time zone</span>
+                                    </div>
+                                    <select id="timeZone" class="form-control"></select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!--<div class="input-group mb-3 col-3">
+                                    <div class="input-group-prepend">
+                                        <label class="input-group-text" >Device</label>
+                                    </div>
+                                    <select class="custom-select" id="deviceSelection" >
+                                        <option selected>Select a device type</option>
+                                        <option value="1">general purpose</option>
+                                        <option value="2">bridge</option>
+                                        <option value="3">broadband router</option>
+                                        <option value="3">firewall</option>
+                                        <option value="3">hub</option>
+                                        <option value="3">load balancer</option>
+                                        <option value="3">media device</option>
+                                        <option value="3">PBX</option>
+                                        <option value="3">PDA</option>
+                                        <option value="3">phone</option>
+                                        <option value="3">power-device</option>
+                                        <option value="3">printer</option>
+                                        <option value="3">proxy server</option>
+                                        <option value="3">router</option>
+                                        <option value="3">storage</option>
+                                        <option value="3">switch</option>
+                                        <option value="3">terminal</option>
+                                        <option value="3">WAP</option>
+                                    </select>
+                                </div>
+                                <-->
+                                <div class="input-group mb-3 col-3" style="text-align: right;">
+                                    <input type="button" value="Search" id="omcpSearch" class="btn btn-info"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="timeMachine">
+                    <div id='preloader_tm' class=loaderParent><div class=loader></div></div>
+                    <div id="tmContent" style="display: none">
+                        <div class="spacing-top">
+                            <div class="spacing-top">
+                                <div id="slider-range"></div>
+                            </div>
+                            <div class="row spacing-top">
+                                <div class="input-group mb-3 col-6">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Selected From</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="from_slider" readonly/>
+                                </div>
+                                <div class="input-group mb-3 col-6">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Selected To</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="to_slider" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spacing-top">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item" >
+                                    <a class="nav-link active" href="javascript:void(0);" tm_target='tabTM'>Time Machine</a>
+                                </li>
+                                <li class="nav-item" >
+                                    <a class="nav-link active" href="javascript:void(0);" tm_target='tabEvidence'>Evidence</a>
+                                </li>
+                                <li class="nav-item" >
+                                    <a class="nav-link active" href="javascript:void(0);" tm_target='tabND'>Network Data</a>
+                                </li>
+                                <li class="nav-item" >
+                                    <a class="nav-link active" href="javascript:void(0);" tm_target='tabPatch'>Patch</a>
+                                </li>
+                                <!-- <li class="nav-item">
+                                    <a class="nav-link" href="javascript:void(0);" tm_target='tabAL'>Access logs</a>
+                                </li> -->
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="user-dashboard" tm_landing="tabTM"  style="margin-bottom:50px">
+                                <div class="graph-fluid" id="timemachineGL"></div>
+                            </div>
+                            <div class="user-dashboard" tm_landing="tabEvidence">
+                                <table id="evidenceTable" class="tabella display cell-border compact stripe" style="width:100%">
+                                    <thead class="tabHeader">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Date</th>
+                                        <th>Target vulnerability</th>
+                                        <th>Type of attack</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody jmTable="boxRows">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="user-dashboard" tm_landing="tabND">
+                                <table id="incidentTrackTable" class="tabella display cell-border compact stripe" style="width:100%">
+                                    <thead class="tabHeader">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Data Source</th>
+                                        <th>Creation Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody jmTable="boxRows">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="user-dashboard" tm_landing="tabPatch">
+                                <table id="patchTable" class="tabella display cell-border compact stripe" style="width:100%">
+                                    <thead class="tabHeader">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Device Class</th>
+                                        <th>Release date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody jmTable="boxRows">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="user-dashboard" tm_landing="tabAL">
+                                <h1>AL</h1>
+                                <div>
+                                    <ol class="breadcrumb breadcrumb-arrow" id="breadcrumbAL">
+                                        <li><a href="javascript:void(0)" displayer displayLabel="users" displayMode="list">Access Log</a></li>
+                                    </ol>
+                                </div>
+                                <div label="devices" mode="list">
+                                    <div id="headerAL" style=" margin-top: 10px; text-align: right">
+                                        <button jmRefresh="devices" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                                    </div>
+                                    <div class="row">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="user-dashboard" landing="dashComponents">
+                <h1>Case Components</h1>
+                <div>
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item" >
+                            <a class="nav-link active" href="javascript:void(0);" cm_target='tabDevices'>Devices</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a class="nav-link active" href="javascript:void(0);" cm_target='tabAlerts'>Alerts</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a class="nav-link active" href="javascript:void(0);" cm_target='tabNotifications'>Notifications</a>
+                        </li>
+                        <!--
+                        <li class="nav-item" >
+                            <a class="nav-link" href="javascript:void(0);" cm_target='tabEvidence'>Evidences</a>
+                        </li>
+                        -->
+                    </ul>
+                </div>
+                <div>
+                    <div class="user-dashboard" cm_landing="tabDevices">
+                        <h1>Devices</h1>
+                        <div>
+                            <ol class="breadcrumb breadcrumb-arrow" id="breadcrumbDevices">
+                                <li><a href="javascript:void(0)" displayer displayLabel="devices" displayMode="list">Devices list</a></li>
+                            </ol>
+                        </div>
+                        <div label="devices" mode="list">
+                            <div id="headerDevice" style=" margin-top: 10px; text-align: right">
+                                <button jmRefresh="devices" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                            </div>
+                            <div class="row">
+                                <table id="devicesTable" class="tabella cell-border compact stripe tabella" style="width:100%">
+                                    <thead class="tabHeader">
+                                    <tr>
+                                        <th>Manufacturer</th>
+                                        <th>Model</th>
+                                        <th>Owner</th>
+                                        <th>Description</th>
+                                        <th>Type</th>
+                                        <th>Trust Level</th>
+                                        <th>Risk Level</th>
+                                        <th>OS</th>
+                                        <th>Patching status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody jmTable="boxRows">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div label="devices" mode="form">
+                            <form id="addDeviceForm">
+                                <div class="form-group">
+                                    <div id="deviceFormGeneric">
+                                        <h4>Device data</h4>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Description</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_description" name="device_description" toValidate="required">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">CPE</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_cpe" name="device_cpe" toValidate="required" disabled>
+                                            </div>
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Type</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_type" name="device_type" toValidate="required"  disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group col-md-9 ">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Owner</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_owner" readonly toValidate="required" disabled>
+                                            </div>
+                                            <div hidden>
+                                                <input id="device_owner_id" name="device_owner_id" disabled>
+                                                <input id="device_owner_type" name="device_owner_type" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="deviceFormHW">
+                                        <h4>Hardware information</h4>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Manufacture</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_device_info_manufacturer" name="device_device_info_manufacturer" toValidate="required" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Model</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_device_info_model" name="device_device_info_model" toValidate="required">
+                                            </div>
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Identifier</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_device_info_hardware_id" name="device_device_info_hardware_id" toValidate="required">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col-5">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">IP Address</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_ip" name="device_ip" toValidate="required" disabled>
+                                            </div>
+                                            <div class="input-group mb-3 col-5">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Mac Address</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_mac" name="device_mac" toValidate="required" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="deviceFormOS">
+                                        <h4>OS configuration</h4>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Operative System</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_device_info_os_name" name="device_device_info_os_name" toValidate="required" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Version</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_device_info_os_version" name="device_device_info_os_version" toValidate="required" disabled>
+                                            </div>
+                                            <div class="input-group mb-3 col">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">SDK</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="device_device_info_os_sdk" name="device_device_info_os_sdk" toValidate="required" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="deviceSecurity">
+                                        <h4>Security status</h4>
+                                        <div class="row">
+                                            <!--<div class="input-group mb-3 col-4">
+                                                <label>Patch</label>
+                                                <canvas id="gaugePatchLvl" ></canvas>
+                                            </div>-->
+                                            <div class="input-group mb-3 col-4">
+                                                <label>Trust level</label>
+                                                <canvas id="gaugeTrust" ></canvas>
+                                            </div>
+                                            <div class="input-group mb-3 col-4">
+                                                <label>Risk level</label>
+                                                <canvas id="gaugeRisk" ></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div hidden>
+                                    <input name="device_userId"/>
+                                    <input name="token"/>
+                                </div>
+                                <div class="form-actions">
+                                    <input type="button" value="Back"   id="deviceFormCancel" class=" btn btn-default" displayer displayLabel="devices" displayMode="list"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="user-dashboard" cm_landing="tabAlerts">
+                        <h1>Alerts</h1>
+                        <div>
+                            <ol class="breadcrumb breadcrumb-arrow" id="breadcrumbAlerts">
+                                <li><a href="javascript:void(0)" displayer displayLabel="alerts" displayMode="list">Alerts list</a></li>
+                            </ol>
+                        </div>
+                        <div label="alerts" mode="list">
+                            <div id="headerAlert" style=" margin-top: 10px; text-align: right">
+                                <button jmRefresh="alerts" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                            </div>
+                            <div class="row">
+                                <table id="alertsTable" class="tabella cell-border compact stripe tabella" style="width:100%">
+                                    <thead class="tabHeader">
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Device</th>
+                                        <th>Dev. type</th>
+                                        <th>Criticality</th>
+                                        <th>Importance</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody jmTable="boxRows">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user-dashboard" cm_landing="tabNotifications">
+                        <h1>Notifications</h1>
+                        <div>
+                            <ol class="breadcrumb breadcrumb-arrow" id="breadcrumbNotifications">
+                                <li><a href="javascript:void(0)" displayer displayLabel="devices" displayMode="list">Notifications list</a></li>
+                            </ol>
+                        </div>
+                        <div label="notifications" mode="list">
+                            <div id="headerNotifications" style=" margin-top: 10px; text-align: right">
+                                <button jmRefresh="notification" class="btn btn-primary" ><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+                            </div>
+                            <div class="row">
+                                <table id="notificationTable" class="tabella cell-border compact stripe tabella" style="width:100%">
+                                    <thead class="tabHeader">
+                                    <tr>
+                                        <th>!</th>
+                                        <th>Notification</th>
+                                        <th>Type</th>
+                                        <th>Threat level</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody jmTable="boxRows">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /MAIN DASHBOARD -->
+<!-- MODAL -->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Log out</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure to leave the <b>Cyber Trust</b> platform?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-primary" id="execLogout">Logout</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="notificationModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="notificationModalTitle"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div id="preloader_notificationModalBody" class="singlePreloader" style="display: none"><div class="loader"></div></div>
+            <div class="modal-body">
+                <div id="notificationForm">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-lg-12">
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Tip</span>
+                                </div>
+                                <input class="form-control" placeholder="Not set" type="text" name="tip" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-lg-12">
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Description</span>
+                                </div>
+                                <textarea class="form-control" placeholder="Not set" type="text" name="description" rows="6" disabled></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contentbox" id="mitigationData" style="display: none">
+                        <h4>Possible Mitigation</h4>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-12">
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">CVE</span>
+                                    </div>
+                                    <input class="form-control" placeholder="Not set" type="text" name="cve" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-12">
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Type</span>
+                                    </div>
+                                    <input class="form-control" placeholder="Not set" type="text" name="mitigation_type" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-12">
+                                <div class="form-group input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Reference</span>
+                                    </div>
+                                    <input class="form-control" placeholder="Not set" type="text" name="mitigation_reference" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="alertModal">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="alertModalTitle"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div id="preloader_alertModalBody" class="singlePreloader" style="display: none"><div class="loader"></div></div>
+            <div class="modal-body">
+                <div id="alertForm">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-lg-6">
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">#</span>
+                                </div>
+                                <input class="form-control" placeholder="Not set" type="text" name="signature_id" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-lg-8">
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Category</span>
+                                </div>
+                                <input class="form-control" placeholder="Not set" type="text" name="category" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-8 col-lg-8">
+                            <div class="form-group input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Signature</span>
+                                </div>
+                                <input class="form-control" placeholder="Not set" type="text" name="signature" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<!--/MODAL/-->
+</body>
+<!-- Jquery -->
+<script type="text/javascript" src="../js2/jquery-3.4.1.min.js"></script>
+<!-- AjaxForm -->
+<script type="text/javascript" src="../js2/jquery.form.min.js"></script>
+<!-- Popper -->
+<script type="text/javascript" src="../js2/popper/popper.min.js"></script>
+<!-- Bootstrap -->
+<script type="text/javascript" src="../js2/bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTable Full -->
+<script type="text/javascript" src="../js2/DataTables/datatables.min.js"></script>
+<!-- Datepicker -->
+<script src="../js2/jquery.datetimepicker.full.min.js"></script>
+<!-- TimeZone
+<script type="text/javascript" src="../js2/moment-timezone.min.js"></script>
+<script type="text/javascript" src="../js2/distTimeZone/timezone-picker.min.js"></script>
+-->
+<!-- Validator -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+<!-- GoldenLayout -->
+<script type="text/javascript" src="../js2/goldenLayout/goldenlayout.min.js"></script>
+<!-- ChartJS -->
+<script type="text/javascript" src="../js2/ChartJS/Chart.bundle.min.js"></script>
+<!-- Gauge -->
+<script type="text/javascript" src="../js2/Gauge/gauge.min.js"></script>
+<!-- Moment -->
+<script type="text/javascript" src="../js2/moment.min.js"></script>
+<!-- Timezone -->
+<script type="text/javascript" src="../js2/timezones.full.min.js"></script>
+<!-- Context Menu -->
+<script src="../js2/contextMenu/jquery.contextMenu.min.js"></script>
+<script src="../js2/contextMenu/jquery.ui.position.js"></script>
+<!-- Jquery UI -->
+<script src="../js2/jquery-ui/jquery-ui.min.js"></script>
+<!-- Pagina -->
+<script type="text/javascript" src="../js2/Common.js"></script>
+<script type="text/javascript" src="../js2/profilingServices.js"></script>
+<script type="text/javascript" src="./case_home.js"></script>
+<script src="../host.js"></script>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<!--
+* CoreUI - Free Bootstrap Admin Template
+* @version v2.0.0
+* @link https://coreui.io
+* Copyright (c) 2018 creativeLabs Łukasz Holeczek
+* Licensed under MIT (https://coreui.io/license)
+-->
+<html lang="en">
+<head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="Cyber Trust">
+    <meta name="author" content="Mathema srl">
+    <meta name="keyword" content="Cyber Trust by Mathema">
+    <title>Cyber Trust</title>
+    <!-- Icons-->
+    <link href="vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+    <link href="vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <!-- Main styles for this application-->
+    <script src="js/jquery.js"></script>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+    <link href="css/cyber.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/goldenlayout.js"></script>
+    <script type="text/javascript" src="dati.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/goldenlayout-base.css" />
+    <link type="text/css" rel="stylesheet" href="css/goldenlayout-cyber-theme.css" />
+    <!-- Vis-->
+    <script type="text/javascript" src="js/vis.min.js"></script>
+    <link href="css/vis.min.css" rel="stylesheet" type="text/css" />
+    <!-- -->
+    <script src="js/cyber.js"></script>
+    <link href="slider.css" rel="stylesheet" type="text/css" />
+    <link href="tab.css" rel="stylesheet" type="text/css" />
+
+
+    <!-- CoreUI and necessary plugins-->
+    <script src="vendors/jquery/js/jquery.min.js"></script>
+    <script src="vendors/popper.js/js/popper.min.js"></script>
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/pace-progress/js/pace.min.js"></script>
+    <script src="vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+    <script src="vendors/@coreui/coreui-pro/js/coreui.min.js"></script>
+    <!-- Plugins and scripts required by this view-->
+    <script src="js/chartjs.min.js"></script>
+    <script src="js/custom-tooltips.min.js"></script>
+    <script src="js/moment-with-locales.js"></script>
+    <!-- script src="js/main.js"></script -->
+    <script src="js/cyber.js"></script>
+    <!-- script src="js/charts.js"></script -->
+
+
+    <!-- DatePicker-->
+    <script src="https://www.eyecon.ro/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <link href="https://www.eyecon.ro/bootstrap-datepicker/css/datepicker.css" rel="stylesheet">
+
+    <script type="text/javascript" src="../js/JM.Navigation.js"></script>
+    <script type="text/javascript" src="../js/Form.js"></script>
+    <script src="../Common.js"></script>
+    <link href="led.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        var mem = {};
+        if(window.sessionStorage.getItem('deviceData')){
+            mem['deviceData'] = JSON.parse(window.sessionStorage.getItem('deviceData'));
+        }
+        if(window.sessionStorage.getItem('offlineData')){
+            mem['offlineData'] = JSON.parse(window.sessionStorage.getItem('offlineData'));
+        }
+        if(window.sessionStorage.getItem('todo')){
+            mem['todo'] = window.sessionStorage.getItem('todo');
+            //window.sessionStorage.removeItem('todo')
+        }
+
+        $(document).ready(function() {
+            scheda.view();
+            deviceData();
+            $("#addDevice").click(function(){
+                var device = {
+                    id                  : 'CT010',
+                    mac                 : '00-23-00-27-55-87',
+                    device              : 'Wi-Fi_HOTSPOT_0021',
+                    interface           : 'Wi-Fi/Bluethoot',
+                    trust_level         : 90,
+                    event_remediation    : 'Attacked/Disconnected',
+                    ct                  : 'Yes'
+                }
+            })
+        });
+        function deviceData(){
+            if(mem['deviceData']){
+                Object.keys(mem['deviceData']).forEach(function(key){
+                    $("#v_"+key).empty().append(mem['deviceData'][key]);
+                })
+                $("#deviceName").empty().append(mem['deviceData']['device'])
+                if(mem['deviceData']['trust_level']< 33){
+                    $("#v_trust_level").empty().append("Low");
+                }else if(mem['deviceData']['trust_level']< 66) {
+                    $("#v_trust_level").empty().append("Medium");
+                }else{
+                    $("#v_trust_level").empty().append("High");
+                }
+            }
+        }
+    </script>
+</head>
+<body class="app header-fixed sidebar-fixedOLD aside-menu-fixedOLD sidebar-lg-show">
+<header class="app-header navbar"> <a class="navbar-brand" href="../index.html"> <img class="navbar-brand-full logo" src="img/brand/logo_bn.png" alt="CoreUI Logo"> <img class="navbar-brand-minimized" src="img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo"> </a>
+    <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item d-md-down-none"> <a class="nav-link" href="#"> <i class="icon-clock"></i> <span i)d="clock" class="clock"><span i_d="clock" class="clock">Mon, Mar 11th 2019, 09:40:55</span></span> </a> </li>
+        <li class="nav-item d-md-down-none"> <a class="nav-link" href="#"> <i class="icon-user"></i> <span id="user" class="user">Smart Device Security Company</span> </a> </li>
+        <!--<li class="nav-item d-md-down-none"> <a class="nav-link" href="#"> <i class="icon-bell"></i> <span class="badge badge-pill badge-danger">5</span> </a> </li>-->
+    </ul>
+    <!--
+    <button class="icon_button" type="button" id="addwidget"> <span class="plus-icon"></span> </button>
+    <button class="navbar-toggler aside-menu-toggler d-md-down-none" type="button" data-toggle="aside-menu-lg-show" id="toggle"> <span class="navbar-toggler-icon"></span> <span class="badge badge-pill badge-danger">2</span> </button>
+    <button class="navbar-toggler aside-menu-toggler d-lg-none" type="button" data-toggle="aside-menu-show"> <span class="navbar-toggler-icon"></span> <span class="badge badge-pill badge-danger">2</span> </button>
+    -->
+</header>
+<div class="app-body">
+    <main class="main">
+        <div class="tab-content"  style="background-color: #fcfcfc">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="sds.html">Device List</a></li>
+                    <li class="breadcrumb-item active" aria-current="page" id="deviceName"></li>
+                </ol>
+            </nav>
+        </div>
+        <div class="panel with-nav-tabs panel-default">
+            <div class="panel-heading">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab1default" data-toggle="tab">Device</a></li>
+                    <li ><a href="#tab6default" data-toggle="tab">Operation</a></li>
+                    <li ><a href="#tab2default" data-toggle="tab">Access Log</a></li>
+                    <li ><a href="#tab4default" data-toggle="tab">Event/Remediation</a></li>
+                    <li ><a href="#tab3default" data-toggle="tab">Update action <span class="badge badge-pill badge-danger">1</span></a></li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="tab1default" style="background-color: #fcfcfc; height: 300px">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label><strong>Device ID:</strong></label>
+                                <input id="id" type="text" modalita="mod"/>
+                                <span id="v_id" modalita="view"></span>
+                            </div>
+                            <div class="form-group">
+                                <label><strong>MAC Address:</strong></label>
+                                <input id="mac" type="text" modalita="mod"/>
+                                <span id="v_mac"  modalita="view"></span>
+                            </div>
+                            <div class="form-group">
+                                <label><strong>Device name:</strong></label>
+                                <input id="device" type="text" modalita="mod"/>
+                                <span id="v_device"  modalita="view"></span>
+                            </div>
+                            <div class="form-group">
+                                <label><strong>Connection Interfaces:</strong></label>
+                                <input id="interface" type="text" modalita="mod"/>
+                                <span id="v_interface"  modalita="view"></span>
+                            </div>
+                            <div class="form-group">
+                                <label><strong>Risk Level:</strong></label>
+                                <input id="trust_level" type="text" modalita="mod"/>
+                                <span id="v_trust_level"  modalita="view"></span>
+                            </div>
+                            <div class="form-group">
+                                <label><strong>OS Version:</strong></label>
+                                <input id="os" type="text" modalita="mod" value="Ubuntu CORE"/>
+                                <span id="v_os"  modalita="view">Ubuntu CORE</span>
+                            </div>
+                            <div class="form-group">
+                                <label><strong>Firmware:</strong></label>
+                                <input id="firmware" type="text" modalita="mod" value="AS.34.543334"/>
+                                <span id="v_firmware"  modalita="view">AS.34.543334</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div>
+                                <table class="table table-hover">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Risk level</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody jmTable="boxRows">
+                                        <tr jmTable="row" class="alert-success">
+                                            <th jmTable="date" scope="row">2019/03/01 12:43</th>
+                                            <th jmTable="level" scope="row">Low</th>
+                                        </tr>
+                                        <tr jmTable="row" class="alert-warning">
+                                            <th jmTable="date" scope="row">2019/03/01 11:30</th>
+                                            <th jmTable="level" scope="row">Medium</th>
+                                        </tr>
+                                        <tr jmTable="row"class="alert-danger">
+                                            <th jmTable="date" scope="row">2019/02/12 15:00</th>
+                                            <th jmTable="level" scope="row">High</th>
+                                        </tr>
+                                        <tr jmTable="row"class="alert-success">
+                                            <th jmTable="date" scope="row">2019/01/04 00:00</th>
+                                            <th jmTable="level" scope="row">Low</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade in" id="tab2default" style="background-color: #fcfcfc">
+                        <label>Choose timespan:</label>
+                        </br>
+                        <span>
+                            <label>FROM: </label>
+                            <input type="text" class="span2" value="2019/02/01">
+                            <span class="add-on"><i class="icon-calendar"></i></span>
+                        </span>
+                        <span>
+                            <label>TO: </label>
+                            <input type="text" id="data_to" class="span2" value="2019/02/05">
+                            <span class="add-on"><i class="icon-calendar"></i></span>
+                        </span>
+                        <input type="button" id="search" value="Search" style="float: right"/>
+                        <div id="boxTimeMachine">
+                            <div style=" margin-top: 10px">
+                                <table class="table table-hover">
+                                    <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Date-Stamp</th>
+                                        <th scope="col">IP-Address</th>
+                                        <th scope="col">Domain</th>
+                                        <th scope="col">Time on device</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody jmTable="boxRows">
+                                    <tr jmTable="row">
+                                        <th jmTable="id" scope="row">2019/03/17 11:45</th>
+                                        <td jmTable="mac">187.133.23.456</td>
+                                        <td jmTable="device">mathema.com</td>
+                                        <td jmTable="interface">00:03:21</td>
+                                    </tr>
+                                    <tr jmTable="row">
+                                        <th jmTable="id" scope="row">2019/03/16 22:12</th>
+                                        <td jmTable="mac">546.13.223.55</td>
+                                        <td jmTable="device">cybertrust.com</td>
+                                        <td jmTable="interface">00:01:27</td>
+                                    </tr>
+                                    <tr jmTable="row">
+                                        <th jmTable="id" scope="row">2019/03/16 15:34</th>
+                                        <td jmTable="mac">187.133.23.456</td>
+                                        <td jmTable="device">mathema.com</td>
+                                        <td jmTable="interface">00:13:51</td>
+                                    </tr>
+                                    <tr jmTable="row">
+                                        <th jmTable="id" scope="row">2019/03/15 02:17</th>
+                                        <td jmTable="mac">187.133.23.456</td>
+                                        <td jmTable="device">mathema.com</td>
+                                        <td jmTable="interface">00:00:54</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade in" id="tab3default" style="background-color: #fcfcfc;height: 300px">
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <p>A security update had been found: in order to keep safe your device, you should update the firmware.</p>
+                                <p>Please download the update <a href="http://google.com">here</a></p>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <table class="table table-hover">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Release Date</th>
+                                        <th scope="col">Version</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody jmTable="boxRows">
+                                    <tr jmTable="row" class="alert-info">
+                                        <th jmTable="date" scope="row">2019/03/01 00:00</th>
+                                        <th jmTable="level" scope="row">v_device-firmaware_5.82</th>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="conferme">
+                            <input type="button" value="Update"/>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade in" id="tab4default" style="background-color: #fcfcfc">
+                        <div id="">
+                            <div style=" margin-top: 10px">
+                                <table class="table table-hover">
+                                    <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Vulnerability</th>
+                                        <th >Source</th>
+                                        <th >Description</th>
+                                        <th >Date Vuln.</th>
+                                        <th scope="col">Status</th>
+                                        <th >Remediation</th>
+                                        <th >Date Remed.</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody jmTable="boxRows">
+                                    <tr jmTable="row" class="table-danger">
+                                        <th jmTable="id" >Remote Code Execution</th>
+                                        <th jmTable="id" >ThreatMeter</th>
+                                        <th jmTable="id" >SoapUI 5.3.0 Code Execution Exploit CVE-2017-16670</th>
+                                        <th jmTable="id" >2018/02/12 0:15</th>
+                                        <th jmTable="id" >Pending</th>
+                                        <th jmTable="id" >NONE</th>
+                                        <th jmTable="id" ></th>
+                                    </tr>
+                                    <tr jmTable="row">
+                                        <th jmTable="id" >Remote Command Execution</th>
+                                        <th jmTable="id" >Nubx</th>
+                                        <th jmTable="id" >#TLWA850RE - Remote Command Execution Exploit</th>
+                                        <th jmTable="id" >2018/06/20 9:22</th>
+                                        <th jmTable="id" >Resolved</th>
+                                        <th jmTable="id" >Firmware Upgraded</th>
+                                        <th jmTable="id" >2018/06/20 16:44</th>
+                                    </tr>
+                                    <tr jmTable="row">
+                                        <th jmTable="id" >Denial of Service (DoS)</th>
+                                        <th jmTable="id" >Nubx</th>
+                                        <th jmTable="id" >Wireless N Router #WR840N - Denial of Service Vulnerability</th>
+                                        <th jmTable="id" >2018/04/30 12:22</th>
+                                        <th jmTable="id" >Resolved</th>
+                                        <th jmTable="id" >Firmware Upgraded</th>
+                                        <th jmTable="id" >2018/05/03 09:31</th>
+                                    </tr>
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade in" id="tab6default" style="background-color: #fcfcfc">
+                        <div class="tab-pane">
+                            <h2>Activation</h2>
+                            <span><label style="float: left">Status: </label><p  style="float: left">Activated  </p> <p class="led led-green" style="float: left; margin-left: 10px"></p></span>
+                            <div style="text-align: right">
+                                <input type="button" value="Deactivate" class="btn-danger" />
+                            </div>
+                        </div>
+                        <div class="tab-pane">
+                            <h2>Deploy</h2>
+                            <span><label style="float: left">Status: </label><p  style="float: left">Deployed  </p> <p class="led led-green" style="float: left; margin-left: 10px"></p></span>
+                            <div style="text-align: right">
+                                <input type="button" value="Revoke deploy" class="btn-danger" />
+                            </div>
+                        </div>
+                        <div class="tab-pane">
+                            <h2>Vulnerability</h2>
+                            <span><label style="float: left">Last scan: </label><p  style="float: left">2019/03/16 23:33 ( 2 days ago)</p></span>
+                            <div style="text-align: right">
+                                <input type="button" value="Scanning request" class="btn-info" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

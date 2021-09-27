@@ -1,0 +1,36 @@
+{
+  "name": "cybertrustui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "csv-parser": "^2.3.1",
+    "cytoscape": "^3.18.1",
+    "cytoscape-cise": "^1.0.0",
+    "elasticsearch": "^16.6.0",
+    "express": "^4.17.1",
+    "jade": "^1.11.0",
+    "jquery-form-validator": "^2.3.79",
+    "momentjs": "^2.0.0",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.2",
+    "mysql": "^2.17.1",
+    "python-shell": "^1.0.8",
+    "random-number": "^0.0.9",
+    "random-numbers": "^1.0.8",
+    "request": "^2.88.0",
+    "sse-nodejs": "^0.1.0",
+    "static-favicon": "^2.0.0-alpha"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://192.168.4.13:3000/simone/CyberTrust.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
